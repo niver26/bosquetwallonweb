@@ -8,53 +8,49 @@ import java.util.Set;
 
 public class Person implements Serializable {
 	
-
-
 	
-
-
+	
+	
 	private static final long serialVersionUID = 7787170877756499146L;
 	
-	private int IDPerson;
-	private String FirstName;
+	private int IDperson ;
+	private String FirtsName;
 	private String LastName;
 	private String Adress;
-	private String Email;
+	private String E_Mail;
 	private String PassWord;
-	private int crediCartNumber;
-	private double crediCartBalance;
+	private int creditCartNumber;
+	private double creditCartBalance;
 	private int cartPassCode;
 	
 	/*********************/
-	private Set<Person> listPerson = new HashSet<>();
+	//private Set<Person> listPerson = new HashSet<>();
 	/*****/
 	
-	public Person(int iDPerson, String firstName, String lastName, String adress, 
-			String email, String passWord,int crediCartNumber, double crediCartBalance, 
-			int cartPassCode) {
+	public Person() {
 		
-		IDPerson = iDPerson;
-		FirstName = firstName;
+	}
+	
+	public Person(int iDperson, String firtsName, String lastName, String adress, String e_Mail, String passWord,
+			int creditCartNumber, double creditCartBalance, int cartPassCode) {
+	
+		IDperson = iDperson;
+		FirtsName = firtsName;
 		LastName = lastName;
 		Adress = adress;
-		Email = email;
+		E_Mail = e_Mail;
 		PassWord = passWord;
-		this.crediCartNumber = crediCartNumber;
-		this.crediCartBalance = crediCartBalance;
+		this.creditCartNumber = creditCartNumber;
+		this.creditCartBalance = creditCartBalance;
 		this.cartPassCode = cartPassCode;
-		
-	}
-	
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-	
-	public int getIDPerson() {
-		return IDPerson;
 	}
 
-	public String getFirstName() {
-		return FirstName;
+	public int getIDperson() {
+		return IDperson;
+	}
+
+	public String getFirtsName() {
+		return FirtsName;
 	}
 
 	public String getLastName() {
@@ -65,20 +61,32 @@ public class Person implements Serializable {
 		return Adress;
 	}
 
-	public String getEmail() {
-		return Email;
+	public String getE_Mail() {
+		return E_Mail;
 	}
 
 	public String getPassWord() {
 		return PassWord;
 	}
 
-	public void setIDPerson(int iDPerson) {
-		IDPerson = iDPerson;
+	public int getCreditCartNumber() {
+		return creditCartNumber;
 	}
 
-	public void setFirstName(String firstName) {
-		FirstName = firstName;
+	public double getCreditCartBalance() {
+		return creditCartBalance;
+	}
+
+	public int getCartPassCode() {
+		return cartPassCode;
+	}
+
+	public void setIDperson(int iDperson) {
+		IDperson = iDperson;
+	}
+
+	public void setFirtsName(String firtsName) {
+		FirtsName = firtsName;
 	}
 
 	public void setLastName(String lastName) {
@@ -89,46 +97,20 @@ public class Person implements Serializable {
 		Adress = adress;
 	}
 
-	public void setEmail(String email) {
-		Email = email;
+	public void setE_Mail(String e_Mail) {
+		E_Mail = e_Mail;
 	}
 
 	public void setPassWord(String passWord) {
 		PassWord = passWord;
 	}
-	
-	public void addPerson(Person pers) {
-		if (!listPerson.contains(pers))
-			listPerson.add(pers);
+
+	public void setCreditCartNumber(int creditCartNumber) {
+		this.creditCartNumber = creditCartNumber;
 	}
 
-	public void removePerson(Person pers) {
-		this.listPerson.remove(pers);
-	}
-
-
-	public boolean equal(Person cls) {
-		return this.getIDPerson() == cls.getIDPerson();
-	}
-	
-	public int getCrediCartNumber() {
-		return crediCartNumber;
-	}
-
-	public double getCrediCartBalance() {
-		return crediCartBalance;
-	}
-
-	public int getCartPassCode() {
-		return cartPassCode;
-	}
-
-	public void setCrediCartNumber(int crediCartNumber) {
-		this.crediCartNumber = crediCartNumber;
-	}
-
-	public void setCrediCartBalance(double crediCartBalance) {
-		this.crediCartBalance = crediCartBalance;
+	public void setCreditCartBalance(double creditCartBalance) {
+		this.creditCartBalance = creditCartBalance;
 	}
 
 	public void setCartPassCode(int cartPassCode) {
@@ -137,13 +119,13 @@ public class Person implements Serializable {
 
 	
 /********************************************************/
-	public Set<Person> getListPerson() {
+	/*public Set<Person> getListPerson() {
 		return listPerson;
 	}
 
 	public void setListPerson(Set<Person> listPerson) {
 		this.listPerson = listPerson;
-	}
+	}*/
 	
 	
 	

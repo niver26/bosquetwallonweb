@@ -21,7 +21,7 @@ import java.awt.Color;
 public class Connexion extends JFrame {
 
 	private JPanel contentPane;
-	private JPasswordField passwordField;
+	private JPasswordField passwordFieldConnexion;
 	private JTextField textFieldEmailconnexion;
 
 	/**
@@ -106,9 +106,9 @@ public class Connexion extends JFrame {
 		panel.setBounds(10, 10, 369, 411);
 		contentPane.add(panel);
 		
-		passwordField = new JPasswordField();
-		passwordField.setBounds(531, 246, 308, 36);
-		contentPane.add(passwordField);
+		passwordFieldConnexion = new JPasswordField();
+		passwordFieldConnexion.setBounds(531, 246, 308, 36);
+		contentPane.add(passwordFieldConnexion);
 		
 		textFieldEmailconnexion = new JTextField();
 		textFieldEmailconnexion.setFont(new Font("Vivaldi", Font.BOLD, 20));
