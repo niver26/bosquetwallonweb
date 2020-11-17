@@ -37,7 +37,7 @@ public class PersonDAO extends DAO<Person> {
 					.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY)
 					.executeQuery("SELECT * FROM Person WHERE IDPerson = " + id);
 			if (result.first())
-				person = new Person(id, result.getString("FirtsName"), result.getString("LastName"),
+				person = new Person(id, result.getString("FirstName"), result.getString("LastName"),
 						result.getString("Adress"),	result.getString("E_Mail"),result.getString("PassWord"),
 						result.getInt("creditCartNumber"),result.getDouble("creditCartBalance"), result.getInt("cartPassCode"));
 		

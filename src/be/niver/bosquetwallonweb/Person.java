@@ -7,14 +7,10 @@ import java.util.Set;
 
 
 public class Person implements Serializable {
-	
-	
-	
-	
 	private static final long serialVersionUID = 7787170877756499146L;
 	
 	private int IDperson ;
-	private String FirtsName;
+	private String FirstName;
 	private String LastName;
 	private String Adress;
 	private String E_Mail;
@@ -31,11 +27,11 @@ public class Person implements Serializable {
 		
 	}
 	
-	public Person(int iDperson, String firtsName, String lastName, String adress, String e_Mail, String passWord,
+	public Person(int iDperson, String firstName, String lastName, String adress, String e_Mail, String passWord,
 			int creditCartNumber, double creditCartBalance, int cartPassCode) {
 	
 		IDperson = iDperson;
-		FirtsName = firtsName;
+		FirstName = firstName;
 		LastName = lastName;
 		Adress = adress;
 		E_Mail = e_Mail;
@@ -49,8 +45,8 @@ public class Person implements Serializable {
 		return IDperson;
 	}
 
-	public String getFirtsName() {
-		return FirtsName;
+	public String getFirstName() {
+		return FirstName;
 	}
 
 	public String getLastName() {
@@ -85,8 +81,8 @@ public class Person implements Serializable {
 		IDperson = iDperson;
 	}
 
-	public void setFirtsName(String firtsName) {
-		FirtsName = firtsName;
+	public void setFirstName(String firstName) {
+		FirstName = firstName;
 	}
 
 	public void setLastName(String lastName) {

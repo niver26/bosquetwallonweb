@@ -9,7 +9,7 @@ public class Tester {
 			DAO<Person> personDAO = new PersonDAO(be.niver.connect.ConnectDataBase.getInstance());
 			for (int i = 1; i < 4; i++) {
 				Person person = personDAO.find(i);
-				System.out.println("Person N°: " + person.getIDperson() + "  Nom:  " + person.getFirtsName() + "  Prenom: " + person.getLastName()
+				System.out.println("Person N°: " + person.getIDperson() + "  Nom:  " + person.getFirstName() + "  Prenom: " + person.getLastName()
 				+ "  Adresse:  " + person.getAdress() + "  E_Mail: " + person.getE_Mail()+ "  mot de passe:  " + person.getPassWord() + "  Numero cate de crédit: "
 						+person.getCreditCartNumber()+"  solde carte de credit: " + person.getCreditCartBalance()
 						+ "  code carte: " + person.getCartPassCode());

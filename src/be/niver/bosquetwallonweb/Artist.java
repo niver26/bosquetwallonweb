@@ -7,19 +7,44 @@ import java.util.Set;
 		
 	private static final long serialVersionUID = 7787170877756499146L;
 	
-	private Set<Show> ListShowArtiste = new HashSet<>();
+	
+	/***
+	 * les attributs de la classe
+	 */
+	private int IDPerson_Artiste_fk;
+	private Show ShowArtiste ;
 	private String Speciality ;
 	
+	/***
+	 * les constructeurs de la classe
+	 */
+	public Artist() {
+		
+	}
 	
 	public Artist(int iDPerson, String firstName, String lastName, String adress, String email, String passWord,
-			int crediCartNumber, double crediCartBalance, int cartPassCode, Set<Show> listShowArtiste,
+			int crediCartNumber, double crediCartBalance, int cartPassCode, Show showArtiste,
 			String speciality) {
 		super(iDPerson, firstName, lastName, adress, email, passWord, crediCartNumber, crediCartBalance,
 				cartPassCode);
-		ListShowArtiste = listShowArtiste;
+		ShowArtiste = showArtiste;
 		Speciality = speciality;
 	}
 	
+	
+	/**************************************************************************************/
+	/**
+	 * les Getters et les setters
+	 * @return
+	 */
+	public int getIDPerson_Artiste_fk() {
+		return IDPerson_Artiste_fk;
+	}
+
+	public void setIDPerson_Artiste_fk(int iDPerson_Artiste_fk) {
+		IDPerson_Artiste_fk = iDPerson_Artiste_fk;
+	}
+
 	public String getSpeciality() {
 		return Speciality;
 	}
@@ -28,17 +53,21 @@ import java.util.Set;
 		Speciality = speciality;
 	}
 	
-	public Set<Show> getListShowArtiste() {
-		return ListShowArtiste;
+	public Show getShowArtiste() {
+		return ShowArtiste;
 	}
 
 
-	public void setListShowArtiste(Set<Show> listShowArtiste) {
-		ListShowArtiste = listShowArtiste;
+	public void setShowArtiste(Show showArtiste) {
+		ShowArtiste =showArtiste;
 	}
 	
 	
-	
+	/**************************************************************************************/
+	/**
+	 * les fonctions de la classe
+	 * @return
+	 */
 	
 	
 }
