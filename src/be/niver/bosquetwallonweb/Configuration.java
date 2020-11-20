@@ -65,6 +65,12 @@ public class Configuration implements Serializable{
 	public void setShow_configuration_fk(Show show_configuration_fk) {
 		this.show_configuration_fk = show_configuration_fk;
 	}
+
+	@Override
+	public String toString() {
+		return "Configuration [IDConfiguration=" + IDConfiguration + ", Type=" + Type + ", description=" + description
+				+ ", show_configuration_fk=" + show_configuration_fk + ", listCategoryRoom=" + listCategoryRoom + "]";
+	}
 	
 	
 	

@@ -77,7 +77,13 @@ public class Order implements Serializable{
 		this.price = price;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return "Order [IDOrder=" + IDOrder + ", spectator_oder_fk=" + spectator_oder_fk + ", paymentMethod="
+				+ paymentMethod + ", DeliveryMethod=" + DeliveryMethod + ", price=" + price + ", listPlace=" + listPlace
+				+ "]";
+	}
+
 	
 
 }

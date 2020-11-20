@@ -134,6 +134,14 @@ public class Booking implements Serializable {
 		this.totalPrice = totalPrice;
 	}
 	
+	@Override
+	public String toString() {
+		return "Booking [IDBooking=" + IDBooking + ", deposit=" + deposit + ", insurance=" + insurance
+				+ ", roomBookingPrice=" + roomBookingPrice + ", organizer_Booking_fk=" + organizer_Booking_fk
+				+ ", bookingDate=" + bookingDate + ", optionnalService=" + optionnalService + ", optionnalServicePrice="
+				+ optionnalServicePrice + ", totalPrice=" + totalPrice + ", listPlanningOfRoom=" + listPlanningOfRoom
+				+ "]";
+	}
 	
 
 }

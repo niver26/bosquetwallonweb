@@ -83,7 +83,11 @@ public class Representation implements Serializable{
 	 * les fonctions de la classe
 	 */
 	
-	
+	@Override
+	public String toString() {
+		return "Representation [IDRepresentation=" + IDRepresentation + ", BiginTime=" + BiginTime + ", EndTime="
+				+ EndTime + ", place_representation_fk=" + place_representation_fk + ", listShow=" + listShow + "]";
+	}
 	
 	
 

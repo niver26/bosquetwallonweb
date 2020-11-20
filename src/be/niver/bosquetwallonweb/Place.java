@@ -79,6 +79,11 @@ public class Place implements Serializable{
 		this.order_place_fk = order_place_fk;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return "Place [IDPlace=" + IDPlace + ", price=" + price + ", configuration=" + configuration + ", isDispobible="
+				+ isDispobible + ", order_place_fk=" + order_place_fk + ", listRepresentation=" + listRepresentation
+				+ "]";
+	}
 	
 }

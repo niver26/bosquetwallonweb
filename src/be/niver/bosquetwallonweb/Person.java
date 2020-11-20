@@ -4,8 +4,6 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-
-
 public class Person implements Serializable {
 	private static final long serialVersionUID = 7787170877756499146L;
 	
@@ -123,7 +121,12 @@ public class Person implements Serializable {
 		this.listPerson = listPerson;
 	}*/
 	
-	
+	@Override
+	public String toString() {
+		return "Person [IDperson=" + IDperson + ", FirstName=" + FirstName + ", LastName=" + LastName + ", Adress="
+				+ Adress + ", E_Mail=" + E_Mail + ", PassWord=" + PassWord + ", creditCartNumber=" + creditCartNumber
+				+ ", creditCartBalance=" + creditCartBalance + ", cartPassCode=" + cartPassCode + "]";
+	}
 	
 
 }

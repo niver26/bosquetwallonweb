@@ -6,9 +6,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class PlanningOfRoom implements Serializable{
-	
-	
-
 	private static final long serialVersionUID = 7787170877756499146L;
 
 	private int IDplanningOfRoom;
@@ -17,6 +14,10 @@ public class PlanningOfRoom implements Serializable{
 	private Booking bookin_PlanningOfRoom_fk;
 	private RoomManager RoomManager_PlannigOfRoom;
 	private Set<Show> listShow = new HashSet<>();
+	
+	public PlanningOfRoom() {
+		
+	}
 	
 	public PlanningOfRoom(int iDplanningOfRoom, Date biginDate, Date endDate, Booking bookin_PlanningOfRoom_fk,
 			RoomManager roomManager_PlannigOfRoom) {
@@ -76,7 +77,13 @@ public class PlanningOfRoom implements Serializable{
 		this.listShow = listShow;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return "PlanningOfRoom [IDplanningOfRoom=" + IDplanningOfRoom + ", BiginDate=" + BiginDate + ", EndDate="
+				+ EndDate + ", bookin_PlanningOfRoom_fk=" + bookin_PlanningOfRoom_fk + ", RoomManager_PlannigOfRoom="
+				+ RoomManager_PlannigOfRoom + ", listShow=" + listShow + "]";
+	}
+
 	
 	
 	

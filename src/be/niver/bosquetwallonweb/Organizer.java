@@ -19,6 +19,10 @@ public class Organizer extends Person  {
 	public Organizer() {
 		
 	}
+	
+	public Organizer( int id) {
+		this.IDPerson_Organizer_fk = id;
+	}
 
 	public Organizer( int iDperson, String firstName, String lastName, String adress, String e_Mail, String passWord,
 			int creditCartNumber, double creditCartBalance, int cartPassCode) {
@@ -51,6 +55,12 @@ public class Organizer extends Person  {
 	/***
 	 * les fonctions de la classe
 	 */
+	
+	@Override
+	public String toString() {
+		return "Organizer [IDPerson_Organizer_fk=" + IDPerson_Organizer_fk + ", listBooking=" + listBooking + "]";
+	}
+
 	
 
 }

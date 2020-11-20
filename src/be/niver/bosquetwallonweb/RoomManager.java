@@ -44,6 +44,12 @@ public class RoomManager extends Person {
 	public void setListPlanningOfRoom(Set<PlanningOfRoom> listPlanningOfRoom) {
 		this.listPlanningOfRoom = listPlanningOfRoom;
 	}
+
+	@Override
+	public String toString() {
+		return "RoomManager [IDPerson_RoomManager_fk=" + IDPerson_RoomManager_fk + ", listPlanningOfRoom="
+				+ listPlanningOfRoom + "]";
+	}
 	
 	/*********************************************************************************/
 	/***

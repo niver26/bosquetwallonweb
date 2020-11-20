@@ -16,6 +16,7 @@ public class ConnectDataBase {
 				instance = DriverManager.getConnection(url);
 			}
 			catch(ClassNotFoundException ex){
+			ex.printStackTrace();
 		JOptionPane.showMessageDialog(null, "Classe de driver introuvable" + ex.getMessage());
 				System.exit(0);
 			}

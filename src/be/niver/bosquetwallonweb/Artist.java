@@ -3,7 +3,7 @@ package be.niver.bosquetwallonweb;
 import java.util.HashSet;
 import java.util.Set;
 
-	class Artist extends Person {
+	public class Artist extends Person {
 		
 	private static final long serialVersionUID = 7787170877756499146L;
 	
@@ -28,6 +28,14 @@ import java.util.Set;
 		super(iDPerson, firstName, lastName, adress, email, passWord, crediCartNumber, crediCartBalance,
 				cartPassCode);
 		ShowArtiste = showArtiste;
+		Speciality = speciality;
+	}
+	
+	public Artist(int iDPerson, String firstName, String lastName, String adress, String email, String passWord,
+			int crediCartNumber, double crediCartBalance, int cartPassCode, String speciality) {
+		super(iDPerson, firstName, lastName, adress, email, passWord, crediCartNumber, crediCartBalance,
+				cartPassCode);
+		
 		Speciality = speciality;
 	}
 	
@@ -68,6 +76,12 @@ import java.util.Set;
 	 * les fonctions de la classe
 	 * @return
 	 */
+	
+	@Override
+	public String toString() {
+		return "Artist [IDPerson_Artiste_fk=" + IDPerson_Artiste_fk + ", ShowArtiste=" + ShowArtiste
+				+ ", Speciality=" + Speciality + "]";
+	}
 	
 	
 }

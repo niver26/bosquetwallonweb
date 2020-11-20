@@ -85,6 +85,11 @@ public class Show implements Serializable{
 		this.listRepresentation = listRepresentation;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return "Show [IDShow=" + IDShow + ", title=" + title + ", representation_show_fk=" + representation_show_fk
+				+ ", planning_show_fk=" + planning_show_fk + ", Organizer_show_fk=" + Organizer_show_fk
+				+ ", listConfiguration=" + listConfiguration + ", listRepresentation=" + listRepresentation + "]";
+	}
 
 }

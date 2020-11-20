@@ -50,4 +50,10 @@ public class Spectator extends Person{
 	 * les fonctions de la classe
 	 */
 	
+	@Override
+	public String toString() {
+		return "Spectator [IDPerson_fk=" + IDPerson_fk + ", listOrder=" + listOrder + "]";
+	}
+
+	
 }

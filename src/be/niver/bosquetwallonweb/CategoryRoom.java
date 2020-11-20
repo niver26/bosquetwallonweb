@@ -43,6 +43,12 @@ public class CategoryRoom implements Serializable{
 	public void setConfiguration_categoryRoom_fk(Configuration configuration_categoryRoom_fk) {
 		this.configuration_categoryRoom_fk = configuration_categoryRoom_fk;
 	}
+
+	@Override
+	public String toString() {
+		return "CategoryRoom [IDCategoryRoom=" + IDCategoryRoom + ", IsDisponible=" + IsDisponible
+				+ ", configuration_categoryRoom_fk=" + configuration_categoryRoom_fk + "]";
+	}
 	
 	
 	
