@@ -1,8 +1,12 @@
 package be.niver.bosquetwallonweb;
 
 
+import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
+
+import be.niver.dao.SpectatorDAO;
 
 public class Spectator extends Person{
 	
@@ -18,9 +22,10 @@ public class Spectator extends Person{
 		
 	}
 
-	public Spectator(int iDperson, String firstName, String lastName, String adress, String e_Mail, String passWord) {
-		super(iDperson, firstName, lastName, adress, e_Mail, passWord);
+	public Spectator(int iDperson, String firstName, String lastName, String adress, String e_Mail, String passWord, int Role) {
+		super(iDperson, firstName, lastName, adress, e_Mail, passWord, Role);
 		// TODO Auto-generated constructor stub
+		IDPerson_fk = iDperson;
 	}
 
 	
@@ -54,5 +59,40 @@ public class Spectator extends Person{
 		return "Spectator [IDPerson_fk=" + IDPerson_fk + ", listOrder=" + listOrder + "]";
 	}
 
+	@Override
+	public boolean create(Connection conn) {
+		SpectatorDAO dao = new SpectatorDAO(conn);
+		return dao.create(this);		
+		
+	}
+
+	@Override
+	public boolean delete(Connection conn) {
+		SpectatorDAO dao = new SpectatorDAO(conn);
+		return dao.delete(this);		
+		
+	}
+
+	@Override
+	public boolean update(Connection conn) {
+		SpectatorDAO dao = new SpectatorDAO(conn);
+		return dao.update(this);		
+		
+	}
+
+	@Override
+	public Spectator find(Connection conn) {
+		SpectatorDAO dao = new SpectatorDAO(conn);
+		return dao.find(this.getIDPerson_fk());		
+		
+	}
 	
+	@Override
+	public Spectator login(Connection conn) {
+		SpectatorDAO dao = new SpectatorDAO(conn);
+		return dao.login(this.getE_Mail(), this.getPassWord());		
+		
+	}
+	
+
 }

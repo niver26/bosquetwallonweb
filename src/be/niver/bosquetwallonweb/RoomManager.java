@@ -1,8 +1,11 @@
 package be.niver.bosquetwallonweb;
 
-import java.io.Serializable;
+import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
+
+import be.niver.dao.RoomManagerDAO;
 
 public class RoomManager extends Person {
 	/***
@@ -20,9 +23,9 @@ public class RoomManager extends Person {
 		
 	}
 	
-	public RoomManager(int iDperson, String firstName, String lastName, String adress, String e_Mail, String passWord) {
-		super(iDperson, firstName, lastName, adress, e_Mail, passWord);
-		
+	public RoomManager(int iDperson, String firstName, String lastName, String adress, String e_Mail, String passWord,int Role) {
+		super(iDperson, firstName, lastName, adress, e_Mail, passWord, Role);
+		IDPerson_RoomManager_fk = iDperson;
 	}
 	
 	/******************************************************************/
@@ -55,6 +58,40 @@ public class RoomManager extends Person {
 	 * les fonctions de la classe
 	 */
 	
+	
+	@Override
+	public boolean create(Connection conn) {
+		RoomManagerDAO dao = new RoomManagerDAO(conn);
+		return dao.create(this);		
+		
+	}
+
+	@Override
+	public boolean delete(Connection conn) {
+		RoomManagerDAO dao = new RoomManagerDAO(conn);
+		return dao.delete(this);		
+		
+	}
+
+	@Override
+	public boolean update(Connection conn) {
+		RoomManagerDAO dao = new RoomManagerDAO(conn);
+		return dao.update(this);		
+		
+	}
+
+	public RoomManager find(Connection conn) {
+		RoomManagerDAO dao = new RoomManagerDAO(conn);
+		return dao.find(this.getIDPerson_RoomManager_fk());		
+		
+	}
+	
+	@Override
+	public RoomManager login(Connection conn) {
+		RoomManagerDAO dao = new RoomManagerDAO(conn);
+		return dao.login(this.getE_Mail(), this.getPassWord());		
+		
+	}
 	
 
 }

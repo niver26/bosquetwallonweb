@@ -6,6 +6,8 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.GraphicsDevice;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -15,6 +17,8 @@ import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+
+import be.niver.bosquetwallonweb.Person;
 
 public class Home extends JFrame {
 
@@ -79,14 +83,7 @@ public class Home extends JFrame {
 		menuBar.setFont(new Font("HP Simplified", Font.BOLD, 28));
 		setJMenuBar(menuBar);
 		
-		JMenu mnInscriptionacceuil, mnConnectionacceuil, mnexitacceuil, Bookshowacceuil;
-		mnInscriptionacceuil=new JMenu("Inscription");
-		mnInscriptionacceuil.setFont(new Font("HP Simplified", Font.BOLD | Font.ITALIC, 15));
-		mnInscriptionacceuil.setForeground(Color.BLACK);
-		mnInscriptionacceuil.setBackground(Color.BLACK);
-		mnConnectionacceuil=new JMenu("Connexion");    
-		mnConnectionacceuil.setFont(new Font("HP Simplified", Font.BOLD | Font.ITALIC, 15));
-		mnConnectionacceuil.setForeground(Color.BLACK);
+		JMenu mnexitacceuil, Bookshowacceuil, mnuser;
 		mnexitacceuil=new JMenu("Quiter"); 
 		mnexitacceuil.setBackground(Color.RED);
 		mnexitacceuil.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -98,11 +95,27 @@ public class Home extends JFrame {
 		Bookshowacceuil.setFont(new Font("HP Simplified", Font.BOLD | Font.ITALIC, 15));
 		Bookshowacceuil.setForeground(Color.BLACK);
 		
+	
+		if(Person.CurrentUser != null && Person.CurrentUser.getIDperson() >0) {
+			mnuser=new JMenu(Person.CurrentUser.getFirstName() + " " +  Person.CurrentUser.getLastName()); 
+			mnuser.setBackground(Color.RED);
+			mnuser.setHorizontalAlignment(SwingConstants.LEFT);
+			mnuser.setFont(new Font("HP Simplified", Font.BOLD | Font.ITALIC, 15));
+			mnuser.setForeground(Color.BLACK);
+			
+			menuBar.add(mnuser);
+			
+			// action
+			mnuser.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+			});
+		}
 		
-		
-		
-		menuBar.add(mnInscriptionacceuil);
-		menuBar.add(mnConnectionacceuil);
 		menuBar.add(Bookshowacceuil);
 		menuBar.add(mnexitacceuil);
 		/*JMenuItem Spectator, Artiste, Organizer, RoomManager;
@@ -119,6 +132,16 @@ public class Home extends JFrame {
 		mnInscription.add(Organizer);
 		mnInscription.add(RoomManager); */ 
 		  
+		// action
+		mnexitacceuil.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				dispose();
+			}
+		});
+
 		
 		
 		

@@ -16,7 +16,7 @@ import java.sql.SQLException;
 		  public boolean updateStatement(String query) throws SQLException{  
 			  PreparedStatement ps = connect.prepareStatement(query); 
 			  int result = ps.executeUpdate();
-			  System.out.println(result);
+			  System.out.println("update result is "+ result);
               return  result > 0;  
 	      }  
 

@@ -26,11 +26,12 @@ public class ArtistDAO extends PersonDAO{
 			boolean result1 =  super.create(person);
 			
 			// recuperer la derniere personne enregistré
-			Person p = super.findByEmail(person.getE_Mail());
+			Person p = super.login(person.getE_Mail(), person.getPassWord());
+			System.out.println("person login is : "+p);
 
 			result = updateStatement(String.format("INSERT INTO Artist VALUES ( %s, %s, '%s' )",  
 					p.getIDperson(),
-					obj.getShowArtiste(),
+					obj.getShowArtiste().getIDShow(),
 					obj.getSpeciality()));  
 			
 			result = result && result1;
@@ -72,15 +73,24 @@ public class ArtistDAO extends PersonDAO{
 			result = updateStatement(String.format("UPDATE  Artist "
 					+ "SET show_Artiste_fk = %s, speciality = '%s'"
 					+ " WHERE IDPerson_Artiste_fk= %s",  
-					obj.getShowArtiste(),
+					obj.getShowArtiste().getIDShow(),
 					obj.getSpeciality(),
 					obj.getIDPerson_Artiste_fk()
 					));  
+			
+			System.out.println("update artist is "+ result);
 		result = result && result1;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
 		return result;
+	}
+	
+	@Override
+	public Artist login(String email, String password ) {
+		var p = super.login(email, password);
+		return find(p.getIDperson());
 	}
 	
 	@Override
@@ -96,7 +106,6 @@ public class ArtistDAO extends PersonDAO{
 													+ "INNER JOIN Organizer as o on s.organizer_show_fk= o.IDPerson_Organizer_fk "
 													+ "where IDPerson_Artiste_fk = " + id );
 			
-			
 			if (result.first()) {
 				//System.out.println(result);
 				Representation representation = new Representation();
@@ -104,7 +113,7 @@ public class ArtistDAO extends PersonDAO{
 				Organizer organizer = new Organizer();
 				Show show = new Show(result.getInt("IDShow"),result.getString("title"),representation,planning,organizer);
 				artist = new Artist(id, result.getString("FirstName"), result.getString("LastName"),
-						result.getString("Adress"),	result.getString("E_Mail"),result.getString("PassWord"),
+						result.getString("Adress"),	result.getString("E_Mail"),result.getString("PassWord"), result.getInt("role"),
 						show, result.getString("speciality"));
 			}
 
@@ -132,7 +141,7 @@ public class ArtistDAO extends PersonDAO{
 				Organizer organizer = new Organizer();
 				Show show = new Show(result.getInt("IDShow"),result.getString("title"),representation,planning,organizer);
 				artist = new Artist(result.getInt("IDPerson_Artiste_fk"), result.getString("FirstName"), result.getString("LastName"),
-						result.getString("Adress"),	result.getString("E_Mail"),result.getString("PassWord"),
+						result.getString("Adress"),	result.getString("E_Mail"),result.getString("PassWord"), result.getInt("role"),
 						show, result.getString("speciality"));
 				persons.add(artist);
 			}
@@ -144,4 +153,6 @@ public class ArtistDAO extends PersonDAO{
 		}
 		return persons;
 	}
+	
+	
 }

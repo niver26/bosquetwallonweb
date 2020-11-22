@@ -21,6 +21,8 @@ import javax.swing.border.EmptyBorder;
 
 import be.niver.bosquetwallonweb.Organizer;
 import be.niver.bosquetwallonweb.Person;
+import be.niver.bosquetwallonweb.RoomManager;
+import be.niver.bosquetwallonweb.Spectator;
 import be.niver.dao.ArtistDAO;
 import be.niver.dao.DAO;
 import be.niver.dao.OrganizerDAO;
@@ -42,9 +44,7 @@ public class Inscription extends JFrame  {
 	private JTextField textFieldadresseInscription;
 	private JTextField textFieldprenomInscription;
 	private JTextField textFieldNomInscription;
-	private JTextField textField;
-	private JTextField textFieldTitulaireCartebancaire;
-
+	private Inscription frame;
 	/**
 	 * Launch the application.
 	 */
@@ -84,7 +84,7 @@ public class Inscription extends JFrame  {
 		lblNewLabel.setForeground(Color.BLUE);
 		lblNewLabel.setFont(new Font("Vivaldi", Font.BOLD | Font.ITALIC, 33));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(10, 10, 758, 33);
+		lblNewLabel.setBounds(141, 10, 615, 33);
 		contentPane.add(lblNewLabel);
 		
 		JLabel lblNomInscription = new JLabel("Nom");
@@ -145,43 +145,6 @@ public class Inscription extends JFrame  {
 		btnvaliderPageInscription.setBounds(157, 459, 98, 46);
 		contentPane.add(btnvaliderPageInscription);
 		
-		// ajouter l'action
-		btnvaliderPageInscription.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				
-			try {
-				Person person = null;
-				DAO<Person> personDAO = null;
-				String passwordhash = new Md5hash().getMd5(passwordFieldInscription.getPassword().toString());
-				if(rdbtnOrganissateurInscription.isSelected()) {
-					// JOptionPane.showMessageDialog(null, "organisateur", "InfoBox: ", JOptionPane.INFORMATION_MESSAGE);
-					person = new Organizer( 0, textFieldprenomInscription.getText(), 
-							textFieldNomInscription.getText(), textFieldadresseInscription.getText(), 
-							textFieldemailInscription.getText(), passwordhash);
-					personDAO = new OrganizerDAO(be.niver.connect.ConnectDataBase.getInstance());
-				} else if(rdbtnGestionnaireInscription.isSelected()) {
-					// JOptionPane.showMessageDialog(null, "rdbtnGestionnaireInscription", "InfoBox: ", JOptionPane.INFORMATION_MESSAGE);
-					personDAO = new RoomManagerDAO(be.niver.connect.ConnectDataBase.getInstance());
-				} else if(rdbtnSpectateurInscription.isSelected()) {
-					// JOptionPane.showMessageDialog(null, "rdbtnSpectateurInscription", "InfoBox: ", JOptionPane.INFORMATION_MESSAGE);
-				
-					personDAO = new SpectatorDAO(be.niver.connect.ConnectDataBase.getInstance());
-				}
-				personDAO.create(person);
-				JOptionPane.showMessageDialog(null, "vous êtes bien inscrire en tant que organisateur", "InfoBox: ", JOptionPane.INFORMATION_MESSAGE);
-				
-			} 
-			catch(Exception ex) 
-			{
-				ex.printStackTrace();
-			}
-				
-			}
-		 
-		});
 		
 		JButton btnexitPageInscription = new JButton("Quiter");
 		btnexitPageInscription.setForeground(Color.BLACK);
@@ -228,95 +191,6 @@ public class Inscription extends JFrame  {
 		textFieldNomInscription.setBounds(110, 218, 228, 28);
 		contentPane.add(textFieldNomInscription);
 		
-		JPanel panel = new JPanel();
-		panel.setBackground(SystemColor.inactiveCaption);
-		panel.setBounds(412, 65, 466, 324);
-		contentPane.add(panel);
-		panel.setLayout(null);
-		
-		JLabel lblNewLabel_3_1 = new JLabel("Information r\u00E9lative au paiement et au remboursement");
-		lblNewLabel_3_1.setHorizontalAlignment(SwingConstants.LEFT);
-		lblNewLabel_3_1.setForeground(Color.GRAY);
-		lblNewLabel_3_1.setFont(new Font("Arial", Font.BOLD, 17));
-		lblNewLabel_3_1.setBounds(10, 0, 490, 27);
-		panel.add(lblNewLabel_3_1);
-		
-		textField = new JTextField();
-		textField.setBounds(10, 112, 427, 27);
-		panel.add(textField);
-		textField.setColumns(10);
-		
-		JLabel lblNumerDeCarteInscription = new JLabel("Numer de carte bancaire");
-		lblNumerDeCarteInscription.setHorizontalAlignment(SwingConstants.LEFT);
-		lblNumerDeCarteInscription.setFont(new Font("Vivaldi", Font.BOLD | Font.ITALIC, 20));
-		lblNumerDeCarteInscription.setBounds(10, 69, 427, 27);
-		panel.add(lblNumerDeCarteInscription);
-		
-		JLabel lblPeriodeDeValidit = new JLabel("Periode de validit\u00E9");
-		lblPeriodeDeValidit.setHorizontalAlignment(SwingConstants.LEFT);
-		lblPeriodeDeValidit.setFont(new Font("Vivaldi", Font.BOLD | Font.ITALIC, 20));
-		lblPeriodeDeValidit.setBounds(10, 149, 427, 27);
-		panel.add(lblPeriodeDeValidit);
-		
-		JLabel lblNewLabel_4 = new JLabel("/");
-		lblNewLabel_4.setFont(new Font("Wide Latin", Font.BOLD, 18));
-		lblNewLabel_4.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_4.setBounds(120, 186, 19, 34);
-		panel.add(lblNewLabel_4);
-		
-		JLabel lblTitulaireDeCarte = new JLabel("Titulaire de carte bancaire");
-		lblTitulaireDeCarte.setHorizontalAlignment(SwingConstants.LEFT);
-		lblTitulaireDeCarte.setFont(new Font("Vivaldi", Font.BOLD | Font.ITALIC, 20));
-		lblTitulaireDeCarte.setBounds(10, 223, 427, 27);
-		panel.add(lblTitulaireDeCarte);
-		
-		textFieldTitulaireCartebancaire = new JTextField();
-		textFieldTitulaireCartebancaire.setToolTipText("");
-		textFieldTitulaireCartebancaire.setColumns(10);
-		textFieldTitulaireCartebancaire.setBounds(10, 260, 427, 27);
-		panel.add(textFieldTitulaireCartebancaire);
-		
-		JComboBox<String> comboBoxMoisInscrition = new JComboBox<String>();
-		comboBoxMoisInscrition.setBounds(20, 186, 73, 32);
-		panel.add(comboBoxMoisInscrition);
-		comboBoxMoisInscrition.setToolTipText("mois");
-		comboBoxMoisInscrition.setBackground(Color.WHITE);
-		
-		JComboBox<String> comboBoxanneeInscrition = new JComboBox<String>();
-		comboBoxanneeInscrition.setBounds(159, 188, 73, 32);
-		panel.add(comboBoxanneeInscrition);
-		comboBoxanneeInscrition.setToolTipText("ann\u00E9e");
-		comboBoxanneeInscrition.setToolTipText("mois");
-		comboBoxanneeInscrition.setBackground(Color.WHITE);
-		
-		// add items to the combo box
-			comboBoxanneeInscrition.addItem("2020");
-			comboBoxanneeInscrition.addItem("2021");
-			comboBoxanneeInscrition.addItem("2022");
-			comboBoxanneeInscrition.addItem("2023");
-			comboBoxanneeInscrition.addItem("2024");
-			comboBoxanneeInscrition.addItem("2025");
-			comboBoxanneeInscrition.addItem("2025");
-			comboBoxanneeInscrition.addItem("2027");
-			comboBoxanneeInscrition.addItem("2028");
-			comboBoxanneeInscrition.addItem("2029");
-			comboBoxanneeInscrition.addItem("2023");
-		
-		
-		// add items to the combo box
-				comboBoxMoisInscrition.addItem("01");
-				comboBoxMoisInscrition.addItem("02");
-				comboBoxMoisInscrition.addItem("03");
-				comboBoxMoisInscrition.addItem("04");
-				comboBoxMoisInscrition.addItem("05");
-				comboBoxMoisInscrition.addItem("06");
-				comboBoxMoisInscrition.addItem("07");
-				comboBoxMoisInscrition.addItem("08");
-				comboBoxMoisInscrition.addItem("09");
-				comboBoxMoisInscrition.addItem("10");
-				comboBoxMoisInscrition.addItem("11");
-				comboBoxMoisInscrition.addItem("12");
-		
 		JRadioButton rdbtnconcentementInscription = new JRadioButton("Je consens \u00E0 la collecte et au traitement de mes donn\u00E9es personnelles tel que d\u00E9fini dans la politique de protection de donn\u00E9es ");
 		rdbtnconcentementInscription.setForeground(Color.PINK);
 		rdbtnconcentementInscription.setFont(new Font("Arial", Font.BOLD, 13));
@@ -330,8 +204,122 @@ public class Inscription extends JFrame  {
 		lblNewLabel_2.setBounds(33, 422, 517, 16);
 		contentPane.add(lblNewLabel_2);
 		
+		JButton btnNewButtonconnecterInscription = new JButton("se connecter");
+		btnNewButtonconnecterInscription.setBounds(10, 10, 121, 33);
+		contentPane.add(btnNewButtonconnecterInscription);
 		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		// action
+		// ajouter l'action
+				btnvaliderPageInscription.addActionListener(new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						// TODO Auto-generated method stub
+						
+					try {
+						Person person = null;
+						
+						if(textFieldprenomInscription.getText().trim() != "" 
+								&& textFieldNomInscription.getText().trim() != "" 
+								&& textFieldadresseInscription.getText().trim() != ""
+								&& textFieldemailInscription.getText().trim() != ""
+								&& passwordFieldInscription.getText().trim() != ""
+								&& (rdbtnOrganissateurInscription.isSelected()
+											|| rdbtnGestionnaireInscription.isSelected() 
+											|| rdbtnSpectateurInscription.isSelected())
+								&& rdbtnconcentementInscription.isSelected()
+								) {
+							
+							if(rdbtnOrganissateurInscription.isSelected()) {
+								// JOptionPane.showMessageDialog(null, "organisateur", "InfoBox: ", JOptionPane.INFORMATION_MESSAGE);
+								person = new Organizer( 0, textFieldprenomInscription.getText(), 
+										textFieldNomInscription.getText(), textFieldadresseInscription.getText(), 
+										textFieldemailInscription.getText(),passwordFieldInscription.getPassword().toString(), 3);
+						
+							} else if(rdbtnGestionnaireInscription.isSelected()) {
+								// JOptionPane.showMessageDialog(null, "rdbtnGestionnaireInscription", "InfoBox: ", JOptionPane.INFORMATION_MESSAGE);
+								person = new RoomManager( 0, textFieldprenomInscription.getText(), 
+										textFieldNomInscription.getText(), textFieldadresseInscription.getText(), 
+										textFieldemailInscription.getText(),passwordFieldInscription.getPassword().toString(),2 );
+						
+							} else if(rdbtnSpectateurInscription.isSelected()) {
+								// JOptionPane.showMessageDialog(null, "rdbtnSpectateurInscription", "InfoBox: ", JOptionPane.INFORMATION_MESSAGE);
+								person = new Spectator( 0, textFieldprenomInscription.getText(), 
+										textFieldNomInscription.getText(), textFieldadresseInscription.getText(), 
+										textFieldemailInscription.getText(),passwordFieldInscription.getPassword().toString(), 4);
+							}
+							var result = person.create(be.niver.connect.ConnectDataBase.getInstance());
+							if(result) {
+								Person.CurrentUser = person.login(be.niver.connect.ConnectDataBase.getInstance());
+								Home home = new Home();
+								JOptionPane.showMessageDialog(null, "bienvenu dans bosquet Wallon ", "bosquet Wallon ", JOptionPane.INFORMATION_MESSAGE);
+								home.setVisible(true);
+								dispose();
+							} else {
+								JOptionPane.showMessageDialog(null, "Erreur rencontrée. Veuillez contacter l'administrateur", "bosquet Wallon ", JOptionPane.ERROR_MESSAGE);
+							}
+							
+						} else {
+							JOptionPane.showMessageDialog(null, "Veuillez verifier tous les champs", "bosquet Wallon ", JOptionPane.ERROR_MESSAGE);
+						}
+						
+					} 
+					catch(Exception ex) 
+					{
+						JOptionPane.showMessageDialog(null, "Erreur rencontrée. Veuillez contacter l'administrateur", "bosquet Wallon ", JOptionPane.ERROR_MESSAGE);
+						ex.printStackTrace();
+					}
+						
+					}
+				 
+				});
+				
+		
+				// buton quitter
+				btnexitPageInscription.addActionListener(new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						// TODO Auto-generated method stub
+						try {
+							//frame.setVisible(false);
+							dispose();
+						} catch (Exception ex) {
+							// TODO: handle exception
+							JOptionPane.showMessageDialog(null, "Erreur rencontrée. Veuillez contacter l'administrateur", "bosquet Wallon ", JOptionPane.ERROR_MESSAGE);
+							ex.printStackTrace();
+						}
+					}
+				});
+				
+				// button connexion
+				btnNewButtonconnecterInscription.addActionListener(new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						// TODO Auto-generated method stub
+						try {
+							Connexion connexion = new Connexion();
+							connexion.setVisible(true);
+							dispose();
+						} catch (Exception ex) {
+							// TODO: handle exception
+							JOptionPane.showMessageDialog(null, "Erreur rencontrée. Veuillez contacter l'administrateur", "bosquet Wallon ", JOptionPane.ERROR_MESSAGE);
+							ex.printStackTrace();
+						}
+					}
+				});
 	}
+	
 	
 	
 	/**

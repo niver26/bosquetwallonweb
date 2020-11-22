@@ -1,7 +1,12 @@
 package be.niver.bosquetwallonweb;
 
+import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
+
+import be.niver.dao.ArtistDAO;
+import be.niver.dao.PersonDAO;
 
 	public class Artist extends Person {
 	private static final long serialVersionUID = 7787170877756499146L;
@@ -21,11 +26,13 @@ import java.util.Set;
 		
 	}
 	
-	public Artist(int iDPerson, String firstName, String lastName, String adress, String email, String passWord, Show showArtiste,
+	public Artist(int iDPerson, String firstName, String lastName, String adress, String email, String passWord,int Role, Show showArtiste,
 			String speciality) {
-		super(iDPerson, firstName, lastName, adress, email, passWord);
+		super(iDPerson, firstName, lastName, adress, email, passWord, Role);
 		ShowArtiste = showArtiste;
 		Speciality = speciality;
+		IDPerson_Artiste_fk = iDPerson;
+		
 	}
 	
 	/**************************************************************************************/
@@ -71,5 +78,39 @@ import java.util.Set;
 				+ ", Speciality=" + Speciality + "]";
 	}
 	
+	@Override
+	public boolean create(Connection conn) {
+		ArtistDAO dao = new ArtistDAO(conn);
+		return dao.create(this);		
+		
+	}
+
+	@Override
+	public boolean delete(Connection conn) {
+		ArtistDAO dao = new ArtistDAO(conn);
+		return dao.delete(this);		
+		
+	}
+
+	@Override
+	public boolean update(Connection conn) {
+		ArtistDAO dao = new ArtistDAO(conn);
+		return dao.update(this);		
+		
+	}
+
+	@Override
+	public Artist find(Connection conn) {
+		ArtistDAO dao = new ArtistDAO(conn);
+		return dao.find(this.getIDPerson_Artiste_fk());		
+		
+	}
+	
+	@Override
+	public Artist login(Connection conn) {
+		ArtistDAO dao = new ArtistDAO(conn);
+		return dao.login(this.getE_Mail(), this.getPassWord());		
+		
+	}
 	
 }
