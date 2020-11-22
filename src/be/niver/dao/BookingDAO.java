@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 import be.niver.bosquetwallonweb.Booking;
 import be.niver.bosquetwallonweb.Organizer;
@@ -36,7 +37,7 @@ public class BookingDAO extends DAO<Booking> {
 	public Booking find(int id) {
 		 
 		
-		Booking person = new Booking();
+		Booking booking = new Booking();
 		try {
 			ResultSet result = this.connect
 					.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY)
@@ -51,22 +52,25 @@ public class BookingDAO extends DAO<Booking> {
 				Date date =   Date.valueOf(dateString.substring(0,10));
 				
 				Organizer organizer = new Organizer(result.getInt("organizer_Booking_fk"));
-				System.out.println(dateString.substring(0,10));
-				System.out.println(date);
-				person = new Booking(id, 0, 0, 0,  null,  null, null,   0,  0);
 				
-				/**
-				 person = new Booking(id, result.getDouble("deposit"), result.getDouble("insurance"),
+				
+				booking = new Booking(id, result.getDouble("deposit"), result.getDouble("insurance"),
 						result.getDouble("roomBookingPrice"),	organizer, date,result.getString("optionnalService"),
 						result.getDouble("optionnalServicePrice"),result.getDouble("totalPrice"));
-				 */
+				
 			}
 		
 	
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return person;
+		return booking;
+	}
+
+	@Override
+	public ArrayList<Booking> findAll() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 

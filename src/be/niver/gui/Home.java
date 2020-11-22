@@ -124,6 +124,17 @@ public class Home extends JFrame {
 		
 	}
 	
+	/**
+	 * this method createEvents() for creating events
+	 * 
+	 */
+	private void createEvents() 
+	{
+		
+		
+		
+	}
+	
 	
 	
 	

@@ -24,9 +24,8 @@ public class Organizer extends Person  {
 		this.IDPerson_Organizer_fk = id;
 	}
 
-	public Organizer( int iDperson, String firstName, String lastName, String adress, String e_Mail, String passWord,
-			int creditCartNumber, double creditCartBalance, int cartPassCode) {
-		super(iDperson, firstName, lastName, adress, e_Mail, passWord, creditCartNumber, creditCartBalance, cartPassCode);
+	public Organizer( int iDperson, String firstName, String lastName, String adress, String e_Mail, String passWord) {
+		super(iDperson, firstName, lastName, adress, e_Mail, passWord);
 		
 	}
 	

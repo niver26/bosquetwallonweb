@@ -5,6 +5,8 @@ import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -16,10 +18,23 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+
+import be.niver.bosquetwallonweb.Organizer;
+import be.niver.bosquetwallonweb.Person;
+import be.niver.dao.ArtistDAO;
+import be.niver.dao.DAO;
+import be.niver.dao.OrganizerDAO;
+import be.niver.dao.PersonDAO;
+import be.niver.dao.RoomManagerDAO;
+import be.niver.dao.SpectatorDAO;
+import be.niver.service.Md5hash;
+import be.niver.service.Md5hashInterface;
+
 import javax.swing.JList;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 
-public class Inscription extends JFrame {
+public class Inscription extends JFrame  {
 
 	private JPanel contentPane;
 	private JPasswordField passwordFieldInscription;
@@ -52,6 +67,7 @@ public class Inscription extends JFrame {
 	public Inscription() {
 		setBackground(new Color(191, 205, 219));
 		initComponents();
+		createEvents();
 		
 	}
 	private void initComponents() 
@@ -128,6 +144,44 @@ public class Inscription extends JFrame {
 		btnvaliderPageInscription.setBackground(SystemColor.textHighlight);
 		btnvaliderPageInscription.setBounds(157, 459, 98, 46);
 		contentPane.add(btnvaliderPageInscription);
+		
+		// ajouter l'action
+		btnvaliderPageInscription.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+			try {
+				Person person = null;
+				DAO<Person> personDAO = null;
+				String passwordhash = new Md5hash().getMd5(passwordFieldInscription.getPassword().toString());
+				if(rdbtnOrganissateurInscription.isSelected()) {
+					// JOptionPane.showMessageDialog(null, "organisateur", "InfoBox: ", JOptionPane.INFORMATION_MESSAGE);
+					person = new Organizer( 0, textFieldprenomInscription.getText(), 
+							textFieldNomInscription.getText(), textFieldadresseInscription.getText(), 
+							textFieldemailInscription.getText(), passwordhash);
+					personDAO = new OrganizerDAO(be.niver.connect.ConnectDataBase.getInstance());
+				} else if(rdbtnGestionnaireInscription.isSelected()) {
+					// JOptionPane.showMessageDialog(null, "rdbtnGestionnaireInscription", "InfoBox: ", JOptionPane.INFORMATION_MESSAGE);
+					personDAO = new RoomManagerDAO(be.niver.connect.ConnectDataBase.getInstance());
+				} else if(rdbtnSpectateurInscription.isSelected()) {
+					// JOptionPane.showMessageDialog(null, "rdbtnSpectateurInscription", "InfoBox: ", JOptionPane.INFORMATION_MESSAGE);
+				
+					personDAO = new SpectatorDAO(be.niver.connect.ConnectDataBase.getInstance());
+				}
+				personDAO.create(person);
+				JOptionPane.showMessageDialog(null, "vous êtes bien inscrire en tant que organisateur", "InfoBox: ", JOptionPane.INFORMATION_MESSAGE);
+				
+			} 
+			catch(Exception ex) 
+			{
+				ex.printStackTrace();
+			}
+				
+			}
+		 
+		});
 		
 		JButton btnexitPageInscription = new JButton("Quiter");
 		btnexitPageInscription.setForeground(Color.BLACK);
@@ -279,4 +333,13 @@ public class Inscription extends JFrame {
 		
 	}
 	
+	
+	/**
+	 * this method createEvents() for creating events
+	 * 
+	 */
+	private void createEvents() 
+	{
+		
+	}
 }
