@@ -28,7 +28,7 @@ public class RoomManagerDAO extends PersonDAO {
 			boolean result1 =  super.create(person);
 			
 			// recuperer la derniere personne enregistré
-			Person p = super.findByEmail(person.getE_Mail());
+			Person p = super.login(person.getE_Mail(), person.getPassWord());
 
 			result = updateStatement(String.format("INSERT INTO RoomManager VALUES ( %s)",  
 					p.getIDperson()));  
@@ -90,7 +90,7 @@ public class RoomManagerDAO extends PersonDAO {
 			
 			while (result.next()) {
 				roomManager = new RoomManager(id, result.getString("FirstName"), result.getString("LastName"),
-						result.getString("Adress"),	result.getString("E_Mail"),result.getString("PassWord"));
+						result.getString("Adress"),	result.getString("E_Mail"),result.getString("PassWord"),result.getInt("role"));
 			}
 
 		} catch (SQLException e) {
@@ -110,7 +110,7 @@ public class RoomManagerDAO extends PersonDAO {
             RoomManager roomManager = new RoomManager();
 			while (result.next()) {
 				roomManager = new RoomManager(result.getInt("IDPerson_RoomManager_fk"), result.getString("FirstName"), result.getString("LastName"),
-						result.getString("Adress"),	result.getString("E_Mail"),result.getString("PassWord"));
+						result.getString("Adress"),	result.getString("E_Mail"),result.getString("PassWord"),result.getInt("role"));
 				persons.add(roomManager);
 			}
 		
@@ -122,6 +122,12 @@ public class RoomManagerDAO extends PersonDAO {
 		return persons;
 	}
 	
+	
+	@Override
+	public RoomManager login(String email, String password ) {
+		var p = super.login(email, password);
+		return find(p.getIDperson());
+	}
 	
 
 }

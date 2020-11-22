@@ -1,7 +1,11 @@
 package be.niver.bosquetwallonweb;
 
+import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
+
+import be.niver.dao.OrganizerDAO;
 
 public class Organizer extends Person  {
 	private static final long serialVersionUID = 7787170877756499146L;
@@ -24,8 +28,9 @@ public class Organizer extends Person  {
 		this.IDPerson_Organizer_fk = id;
 	}
 
-	public Organizer( int iDperson, String firstName, String lastName, String adress, String e_Mail, String passWord) {
-		super(iDperson, firstName, lastName, adress, e_Mail, passWord);
+	public Organizer( int iDperson, String firstName, String lastName, String adress, String e_Mail, String passWord, int Role) {
+		super(iDperson, firstName, lastName, adress, e_Mail, passWord,Role);
+		IDPerson_Organizer_fk = iDperson;
 		
 	}
 	
@@ -61,5 +66,41 @@ public class Organizer extends Person  {
 	}
 
 	
+	@Override
+	public boolean create(Connection conn) {
+		OrganizerDAO dao = new OrganizerDAO(conn);
+		return dao.create(this);		
+		
+	}
 
+	@Override
+	public boolean delete(Connection conn) {
+		OrganizerDAO dao = new OrganizerDAO(conn);
+		return dao.delete(this);		
+		
+	}
+
+	@Override
+	public boolean update(Connection conn) {
+		OrganizerDAO dao = new OrganizerDAO(conn);
+		return dao.update(this);		
+		
+	}
+
+	@Override
+	public Organizer find(Connection conn) {
+		OrganizerDAO dao = new OrganizerDAO(conn);
+		return dao.find(this.getIDPerson_Organizer_fk());		
+		
+	}
+	
+	
+	@Override
+	public Organizer login(Connection conn) {
+		OrganizerDAO dao = new OrganizerDAO(conn);
+		return dao.login(this.getE_Mail(), this.getPassWord());		
+		
+	}
+	
 }
+

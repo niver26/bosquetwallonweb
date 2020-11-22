@@ -28,7 +28,7 @@ public class OrganizerDAO extends PersonDAO {
 			boolean result1 =  super.create(person);
 			
 			// recuperer la derniere personne enregistré
-			Person p = super.findByEmail(person.getE_Mail());
+			Person p = super.login(person.getE_Mail(), person.getPassWord());
 
 			result = updateStatement(String.format("INSERT INTO Organizer VALUES ( %s)",  
 					p.getIDperson()));  
@@ -90,7 +90,7 @@ public class OrganizerDAO extends PersonDAO {
 		            ResultSet result = ps.executeQuery();
 		            while (result.next()) {
 				organizer = new Organizer(id, result.getString("FirstName"), result.getString("LastName"),
-						result.getString("Adress"),	result.getString("E_Mail"),result.getString("PassWord"));
+						result.getString("Adress"),	result.getString("E_Mail"),result.getString("PassWord"),result.getInt("role"));
 			}
 
 		} catch (SQLException e) {
@@ -110,7 +110,7 @@ public class OrganizerDAO extends PersonDAO {
             
 			while (result.next()) {
 				Organizer organizer = new Organizer(result.getInt("IDPerson_Organizer_fk"), result.getString("FirstName"), result.getString("LastName"),
-						result.getString("Adress"),	result.getString("E_Mail"),result.getString("PassWord"));
+						result.getString("Adress"),	result.getString("E_Mail"),result.getString("PassWord"),result.getInt("role"));
 				persons.add(organizer);
 			}
 		
@@ -120,6 +120,12 @@ public class OrganizerDAO extends PersonDAO {
 			e.printStackTrace();
 		}
 		return persons;
+	}
+	
+	@Override
+	public Organizer login(String email, String password ) {
+		var p = super.login(email, password);
+		return find(p.getIDperson());
 	}
 
 }

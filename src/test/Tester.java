@@ -87,7 +87,69 @@ public class Tester {
 			
 			}
 			*/
-			
+		
+		/*DAO<Person> artistDAO = new ArtistDAO(be.niver.connect.ConnectDataBase.getInstance());
+		Artist artist = (Artist) artistDAO.find(1);
+		artist.setAdress("manoka mibolmimanibé");
+		Show show = artist.getShowArtiste();
+		show.setIDShow(4);
+		artist.setShowArtiste(show);
+		artistDAO.update(artist);
+		 artist = (Artist) artistDAO.find(1);
+		System.out.println("Artist N°: " + artist.getIDPerson_Artiste_fk() + "  Nom:  " + artist.getFirstName() + "  Prenom: " + artist.getLastName()
+		+ "  Adresse:  " + artist.getAdress() + "  E_Mail: " + artist.getE_Mail()+ "  mot de passe:  " + artist.getPassWord()+
+				"Show: "+artist.getShowArtiste()+ "Spetialité: "+artist.getSpeciality());*/
+		
+		
+		/*DAO<Person> artistDAO = new ArtistDAO(be.niver.connect.ConnectDataBase.getInstance());
+		Artist artist = (Artist) artistDAO.find(1);
+		artistDAO.delete(artist);
+		
+		artist = (Artist) artistDAO.find(1);
+		System.out.println("Artist N°: " + artist.getIDPerson_Artiste_fk() + "  Nom:  " + artist.getFirstName() + "  Prenom: " + artist.getLastName()
+		+ "  Adresse:  " + artist.getAdress() + "  E_Mail: " + artist.getE_Mail()+ "  mot de passe:  " + artist.getPassWord()+
+				"Show: "+artist.getShowArtiste()+ "Spetialité: "+artist.getSpeciality());
+		*/
+		
+		
+		/*
+
+			Organizer organizer = new Organizer(0, "Dan", "Ost", "te bolia 28", "ots@yahoo.fr", "ots0");
+			var result = organizer.create(be.niver.connect.ConnectDataBase.getInstance());
+			organizer = organizer.login(be.niver.connect.ConnectDataBase.getInstance());
+			System.out.println("Artist N°: " + organizer.getIDPerson_Organizer_fk() + "  Nom:  " + organizer.getFirstName() + "  Prenom: " + organizer.getLastName()
+			+ "  Adresse:  " + organizer.getAdress() + "  E_Mail: " + organizer.getE_Mail()+ "  mot de passe:  " + organizer.getPassWord());
+	
+		*/
+		
+		/*
+		Spectator spectator = new Spectator(0, "Oloam", "Yan", "Yangoua Alex zone 4", "oloam@yahoo.fr", "pass");
+		var result = spectator.create(be.niver.connect.ConnectDataBase.getInstance());
+		spectator = spectator.login(be.niver.connect.ConnectDataBase.getInstance());
+		System.out.println("Artist N°: " + spectator.getIDPerson_fk() + "  Nom:  " + spectator.getFirstName() + "  Prenom: " + spectator.getLastName()
+		+ "  Adresse:  " + spectator.getAdress() + "  E_Mail: " + spectator.getE_Mail()+ "  mot de passe:  " + spectator.getPassWord());
+		
+		
+		
+		RoomManager roomManager = new RoomManager(0, "Alain", "Bernard", "Arrange france v", "anule@yahoo.fr", "zonA");
+		result = roomManager.create(be.niver.connect.ConnectDataBase.getInstance());
+		roomManager = roomManager.login(be.niver.connect.ConnectDataBase.getInstance());
+		System.out.println("Artist N°: " + roomManager.getIDPerson_RoomManager_fk() + "  Nom:  " + roomManager.getFirstName() + "  Prenom: " + roomManager.getLastName()
+		+ "  Adresse:  " + roomManager.getAdress() + "  E_Mail: " + roomManager.getE_Mail()+ "  mot de passe:  " + roomManager.getPassWord());
+		*/
+		
+		
+		
+		
+		/*
+			Artist artist = new Artist(0, "Leon", "OSCA", "Zone D", "salim@yahoo.fr", "hereux", new Show(4, null, null, null, null), "clone");
+		    var  result = artist.create(be.niver.connect.ConnectDataBase.getInstance());
+			artist = artist.login(be.niver.connect.ConnectDataBase.getInstance());
+			System.out.println("Artist N°: " + artist.getIDPerson_Artiste_fk() + "  Nom:  " + artist.getFirstName() + "  Prenom: " + artist.getLastName()
+			+ "  Adresse:  " + artist.getAdress() + "  E_Mail: " + artist.getE_Mail()+ "  mot de passe:  " + artist.getPassWord()+
+					"Show: "+artist.getShowArtiste()+ "Spetialité: "+artist.getSpeciality());
+					*/
+		
 		
 	}
 		

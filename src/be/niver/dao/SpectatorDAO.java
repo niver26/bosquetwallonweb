@@ -31,7 +31,7 @@ public class SpectatorDAO extends PersonDAO{
 			boolean result1 =  super.create(person);
 			
 			// recuperer la derniere personne enregistré
-			Person p = super.findByEmail(person.getE_Mail());
+			Person p = super.login(person.getE_Mail(), person.getPassWord());
 
 			result = updateStatement(String.format("INSERT INTO Spectator VALUES ( %s)",  
 					p.getIDperson()));  
@@ -94,7 +94,7 @@ public class SpectatorDAO extends PersonDAO{
 			
 			while (result.next()) {
 				spectator = new Spectator(id, result.getString("FirstName"), result.getString("LastName"),
-						result.getString("Adress"),	result.getString("E_Mail"),result.getString("PassWord"));
+						result.getString("Adress"),	result.getString("E_Mail"),result.getString("PassWord"),result.getInt("role"));
 			}
 
 		} catch (SQLException e) {
@@ -115,7 +115,7 @@ public class SpectatorDAO extends PersonDAO{
             Spectator spectator = new Spectator();
 			while (result.next()) {
 				spectator = new Spectator(result.getInt("IDPerson_fk"), result.getString("FirstName"), result.getString("LastName"),
-						result.getString("Adress"),	result.getString("E_Mail"),result.getString("PassWord"));
+						result.getString("Adress"),	result.getString("E_Mail"),result.getString("PassWord"),result.getInt("role"));
 				persons.add(spectator);
 			}
 		
@@ -128,4 +128,9 @@ public class SpectatorDAO extends PersonDAO{
 	}
 
 
+	@Override
+	public Spectator login(String email, String password ) {
+		var p = super.login(email, password);
+		return find(p.getIDperson());
+	}
 }

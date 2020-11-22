@@ -10,19 +10,29 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+
+import be.niver.bosquetwallonweb.Organizer;
+import be.niver.bosquetwallonweb.Person;
+import be.niver.bosquetwallonweb.RoomManager;
+import be.niver.bosquetwallonweb.Spectator;
+
 import java.awt.Color;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Connexion extends JFrame {
 
 	private JPanel contentPane;
 	private JPasswordField passwordFieldConnexion;
 	private JTextField textFieldEmailconnexion;
+	private Connexion frame;
 
 	/**
 	 * Launch the application.
@@ -64,12 +74,14 @@ public class Connexion extends JFrame {
 		contentPane.setLayout(null);
 		
 		JButton btnconnectPageConnexion = new JButton("Connecter");
+		
 		btnconnectPageConnexion.setForeground(SystemColor.activeCaptionText);
 		btnconnectPageConnexion.setBackground(SystemColor.textHighlight);
 		btnconnectPageConnexion.setBounds(531, 316, 98, 46);
 		contentPane.add(btnconnectPageConnexion);
 		
 		JButton btnexitconnexionpage = new JButton("Quiter");
+	
 		btnexitconnexionpage.setForeground(SystemColor.activeCaptionText);
 		btnexitconnexionpage.setBackground(new Color(220, 20, 60));
 		btnexitconnexionpage.setBounds(741, 316, 98, 46);
@@ -115,10 +127,90 @@ public class Connexion extends JFrame {
 		textFieldEmailconnexion.setBounds(531, 164, 308, 31);
 		contentPane.add(textFieldEmailconnexion);
 		textFieldEmailconnexion.setColumns(10);
+		
+		JButton btnInscrirePageconnexion = new JButton("s' Inscrire");
+		
+		btnInscrirePageconnexion.setForeground(Color.BLACK);
+		btnInscrirePageconnexion.setBackground(SystemColor.textHighlight);
+		btnInscrirePageconnexion.setBounds(498, 0, 98, 46);
+		contentPane.add(btnInscrirePageconnexion);
 		  
 		
 		
+		// action
+		// se connecter
+		btnconnectPageConnexion.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					if(textFieldEmailconnexion.getText().trim() != null && passwordFieldConnexion.getPassword().toString().trim() != null ) {
+						System.out.println("password phrase login is : "+  passwordFieldConnexion.getText());
+						Person person = new Person(0, null, null, null,  textFieldEmailconnexion.getText() , passwordFieldConnexion.getText(), 0);
+						var p = person.login(be.niver.connect.ConnectDataBase.getInstance());
+						System.out.println("person: "+  p);
+						if(p.getIDperson() > 0) {
+							switch (p.getrole()) {
+							case 2: {
+								p = new RoomManager(p.getIDperson(), null, null, null, null, null, 2).find(be.niver.connect.ConnectDataBase.getInstance());
+								break;
+							}
+							case 3: {
+								p = new Organizer(p.getIDperson(), null, null, null, null, null, 3).find(be.niver.connect.ConnectDataBase.getInstance());
+								break;
+							}
+							case 4: {
+								p = new Spectator(p.getIDperson(), null, null, null, null, null, 4).find(be.niver.connect.ConnectDataBase.getInstance());
+								break;
+							}
+						   }
+							Person.CurrentUser = p;
+							Home home = new Home();
+							home.setVisible(true);
+							dispose();
+						} else {
+							JOptionPane.showMessageDialog(null, "Compte ou mot de passe incorret", "bosquet Wallon ", JOptionPane.ERROR_MESSAGE);
+						}
+						
+					} else {
+						JOptionPane.showMessageDialog(null, "Veuillez remplir tous les champs", "bosquet Wallon ", JOptionPane.ERROR_MESSAGE);
+					}
+					
+				} catch (Exception ex) {
+					// TODO: handle exception
+					JOptionPane.showMessageDialog(null, "Erreur rencontrée. Veuillez contacter l'administrateur", "bosquet Wallon ", JOptionPane.ERROR_MESSAGE);
+					ex.printStackTrace();
+				}
+			}
+		});
 		
+		// aller a inscription
+		btnInscrirePageconnexion.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					Inscription inscription = new Inscription();
+					inscription.setVisible(true);
+					dispose();
+				} catch (Exception ex) {
+					// TODO: handle exception
+					JOptionPane.showMessageDialog(null, "Erreur rencontrée. Veuillez contacter l'administrateur", "bosquet Wallon ", JOptionPane.ERROR_MESSAGE);
+					ex.printStackTrace();
+				}
+			}
+		});
+		
+		// quitter
+		btnexitconnexionpage.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					dispose();
+				} catch (Exception ex) {
+					// TODO: handle exception
+					JOptionPane.showMessageDialog(null, "Erreur rencontrée. Veuillez contacter l'administrateur", "bosquet Wallon ", JOptionPane.ERROR_MESSAGE);
+					ex.printStackTrace();
+				}
+			}
+		});
 	}
 	
 	
