@@ -83,7 +83,7 @@ public class Home extends JFrame {
 		menuBar.setFont(new Font("HP Simplified", Font.BOLD, 28));
 		setJMenuBar(menuBar);
 		
-		JMenu mnexitacceuil, Bookshowacceuil, mnuser;
+		JMenu mnexitacceuil, Bookshowacceuil, mnuser, ReservationRoom, RoomManagerSpace;
 		mnexitacceuil=new JMenu("Quiter"); 
 		mnexitacceuil.setBackground(Color.RED);
 		mnexitacceuil.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -95,6 +95,15 @@ public class Home extends JFrame {
 		Bookshowacceuil.setFont(new Font("HP Simplified", Font.BOLD | Font.ITALIC, 15));
 		Bookshowacceuil.setForeground(Color.BLACK);
 		
+		RoomManagerSpace =new JMenu("Espace manager"); 
+		RoomManagerSpace.setHorizontalAlignment(SwingConstants.RIGHT);
+		RoomManagerSpace.setFont(new Font("HP Simplified", Font.BOLD | Font.ITALIC, 15));
+		RoomManagerSpace.setForeground(Color.BLACK);
+		
+		ReservationRoom =new JMenu("Reserver une salle"); 
+		ReservationRoom.setHorizontalAlignment(SwingConstants.RIGHT);
+		ReservationRoom.setFont(new Font("HP Simplified", Font.BOLD | Font.ITALIC, 15));
+		ReservationRoom.setForeground(Color.BLACK);
 	
 		if(Person.CurrentUser != null && Person.CurrentUser.getIDperson() >0) {
 			mnuser=new JMenu(Person.CurrentUser.getFirstName() + " " +  Person.CurrentUser.getLastName()); 
@@ -117,7 +126,11 @@ public class Home extends JFrame {
 		}
 		
 		menuBar.add(Bookshowacceuil);
+		menuBar.add(ReservationRoom);
+		menuBar.add(RoomManagerSpace);
 		menuBar.add(mnexitacceuil);
+		
+		
 		/*JMenuItem Spectator, Artiste, Organizer, RoomManager;
 		Spectator=new JMenuItem("Spectateur");  
 		Spectator.setForeground(Color.BLUE);
