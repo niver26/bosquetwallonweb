@@ -19,6 +19,9 @@ public class Place implements Serializable{
 		
 	}
 	
+	public Place(int iDPlace) {
+		IDPlace = iDPlace;
+	}
 	public Place(int iDPlace, double price, String configuration, boolean isDispobible, Order order_place_fk) {
 		
 		IDPlace = iDPlace;

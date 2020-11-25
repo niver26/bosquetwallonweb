@@ -17,6 +17,9 @@ public class Configuration implements Serializable{
 	public Configuration() {
 		
 	}
+	public Configuration(int iDConfiguration) {
+		IDConfiguration = iDConfiguration;
+	}
 	
 	public Configuration(int iDConfiguration, String type, String description, Show show_configuration_fk) {
 		

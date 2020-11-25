@@ -21,6 +21,10 @@ public class Order implements Serializable{
 		
 	}
 	
+	public Order(int iDOrder) {
+		IDOrder = iDOrder;
+	}
+	
 	public Order(int iDOrder, Spectator spectator_oder_fk, String paymentMethod, String deliveryMethod, double price) {
 		IDOrder = iDOrder;
 		this.spectator_oder_fk = spectator_oder_fk;

@@ -18,8 +18,11 @@ public class Spectator extends Person{
 	 * les constructeurs
 	 */
 	public Spectator() {
-		super();
 		
+	}
+	
+	public Spectator(int iDperson) {
+		IDPerson_fk = iDperson;
 	}
 
 	public Spectator(int iDperson, String firstName, String lastName, String adress, String e_Mail, String passWord, int Role) {

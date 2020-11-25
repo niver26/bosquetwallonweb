@@ -23,6 +23,9 @@ public class RoomManager extends Person {
 		
 	}
 	
+	public RoomManager(int iDperson) {
+		IDPerson_RoomManager_fk = iDperson;
+	}
 	public RoomManager(int iDperson, String firstName, String lastName, String adress, String e_Mail, String passWord,int Role) {
 		super(iDperson, firstName, lastName, adress, e_Mail, passWord, Role);
 		IDPerson_RoomManager_fk = iDperson;
