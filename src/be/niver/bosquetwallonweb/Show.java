@@ -26,6 +26,10 @@ public class Show implements Serializable{
 	public Show() {
 		
 	}
+	public Show(int iDShow) {
+		IDShow = iDShow;
+	}
+	
 	public Show(int iDShow, String title, Representation representation_show_fk, PlanningOfRoom planning_show_fk,
 			Organizer organizer_show_fk) {
 		super();

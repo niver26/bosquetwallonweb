@@ -22,6 +22,10 @@ public class Booking implements Serializable {
 		
 	}
 	
+	public Booking(int iDBooking) {
+		IDBooking = iDBooking;
+	}
+	
 	public Booking(int iDBooking, double deposit, double insurance, double roomBookingPrice,
 			Organizer organizer_Booking_fk, Date bookingDate, String optionnalService, double optionnalServicePrice,
 			double totalPrice) {

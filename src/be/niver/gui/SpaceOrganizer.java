@@ -17,6 +17,7 @@ import javax.swing.border.EmptyBorder;
 import be.niver.bosquetwallonweb.Person;
 
 import java.awt.Color;
+import javax.swing.JLabel;
 
 public class SpaceOrganizer extends JFrame {
 
@@ -56,6 +57,13 @@ public class SpaceOrganizer extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		
+		JLabel lblEspaceOrganisateurBosquet = new JLabel("Espace Organisateur Bosquet Wallon");
+		lblEspaceOrganisateurBosquet.setHorizontalAlignment(SwingConstants.CENTER);
+		lblEspaceOrganisateurBosquet.setForeground(Color.BLUE);
+		lblEspaceOrganisateurBosquet.setFont(new Font("Vivaldi", Font.BOLD, 30));
+		lblEspaceOrganisateurBosquet.setBounds(10, 10, 869, 36);
+		contentPane.add(lblEspaceOrganisateurBosquet);
 		
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setMargin(new Insets(5, 0, 5, 0));

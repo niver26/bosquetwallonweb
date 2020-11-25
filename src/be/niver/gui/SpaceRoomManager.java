@@ -16,6 +16,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import be.niver.bosquetwallonweb.Person;
+import javax.swing.JLabel;
 
 public class SpaceRoomManager extends JFrame {
 
@@ -53,6 +54,13 @@ public class SpaceRoomManager extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		
+		JLabel lblEspaceManageurBosquet = new JLabel("Espace Manageur Bosquet Wallon");
+		lblEspaceManageurBosquet.setHorizontalAlignment(SwingConstants.CENTER);
+		lblEspaceManageurBosquet.setForeground(Color.BLUE);
+		lblEspaceManageurBosquet.setFont(new Font("Vivaldi", Font.BOLD, 30));
+		lblEspaceManageurBosquet.setBounds(10, 10, 759, 36);
+		contentPane.add(lblEspaceManageurBosquet);
 		
 		
 		JMenuBar menuBar = new JMenuBar();
