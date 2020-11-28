@@ -1,9 +1,14 @@
 package be.niver.bosquetwallonweb;
 
 import java.io.Serializable;
+import java.sql.Connection;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
+
+import be.niver.dao.ArtistDAO;
+import be.niver.dao.BookingDAO;
 
 public class Booking implements Serializable {
 	private static final long serialVersionUID = 7787170877756499146L;
@@ -146,6 +151,48 @@ public class Booking implements Serializable {
 				+ optionnalServicePrice + ", totalPrice=" + totalPrice + ", listPlanningOfRoom=" + listPlanningOfRoom
 				+ "]";
 	}
+	
+	/**************************************************************************************/
+	/**
+	 * les fonctions de la classe
+	 * @return
+	 */
+	
+	public boolean create(Connection conn) {
+		BookingDAO dao = new BookingDAO(conn);
+		return dao.create(this);		
+		
+	}
+
+	public boolean delete(Connection conn) {
+		BookingDAO dao = new BookingDAO(conn);
+		return dao.delete(this);		
+		
+	}
+
+	public boolean update(Connection conn) {
+		BookingDAO dao = new BookingDAO(conn);
+		return dao.update(this);		
+		
+	}
+
+	public Booking find(Connection conn) {
+		BookingDAO dao = new BookingDAO(conn);
+		return dao.find(this.getIDBooking());		
+		
+	}
+	
+	public ArrayList<Booking> findAll(Connection conn) {
+		BookingDAO dao = new BookingDAO(conn);
+		ArrayList<Booking> l = new ArrayList<Booking>();
+		for(var p : dao.findAll()) {
+			l.add((Booking)p);
+		}
+		return l;		
+		
+	}
+	
+	
 	
 
 }

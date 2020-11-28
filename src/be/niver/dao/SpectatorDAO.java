@@ -47,19 +47,7 @@ public class SpectatorDAO extends PersonDAO{
 	
 	@Override
 	public boolean update(Person person) {
-		boolean result = false;
-		try {
-			boolean result1 =super.update(person);
-			Spectator obj = (Spectator) person;
-			result = updateStatement(String.format("UPDATE  Spectator "
-					+ " WHERE IDPerson_fk= %s",  
-					obj.getIDPerson_fk()
-					));  
-		result = result && result1;
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return result;
+		return super.update(person);
 	}
 
 	@Override

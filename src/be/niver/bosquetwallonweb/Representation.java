@@ -1,10 +1,14 @@
 package be.niver.bosquetwallonweb;
 
 import java.io.Serializable;
+import java.sql.Connection;
 import java.sql.Date;
 import java.sql.Time;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
+
+import be.niver.dao.RepresentationDAO;
 
 public class Representation implements Serializable{
 	
@@ -25,6 +29,9 @@ public class Representation implements Serializable{
 	 */
 	public Representation() {
 		
+	}
+	public Representation(int iDRepresentation) {
+		IDRepresentation = iDRepresentation;
 	}
 	
 	public Representation(int iDRepresentation, Time biginTime, 
@@ -96,6 +103,46 @@ public class Representation implements Serializable{
 				+ EndTime + ", place_representation_fk=" + place_representation_fk + ", listShow=" + listShow ;
 	}
 
+	/**************************************************************************************/
+	/**
+	 * les fonctions de la classe
+	 * @return
+	 */
+	
+	public boolean create(Connection conn) {
+		RepresentationDAO dao = new RepresentationDAO(conn);
+		return dao.create(this);		
+		
+	}
+
+	public boolean delete(Connection conn) {
+		RepresentationDAO dao = new RepresentationDAO(conn);
+		return dao.delete(this);		
+		
+	}
+
+	public boolean update(Connection conn) {
+		RepresentationDAO dao = new RepresentationDAO(conn);
+		return dao.update(this);		
+		
+	}
+
+	public Representation find(Connection conn) {
+		RepresentationDAO dao = new RepresentationDAO(conn);
+		return dao.find(this.getIDRepresentation());		
+		
+	}
+	
+	public ArrayList<Representation> findAll(Connection conn) {
+		RepresentationDAO dao = new RepresentationDAO(conn);
+		ArrayList<Representation> l = new ArrayList<Representation>();
+		for(var p : dao.findAll()) {
+			l.add((Representation)p);
+		}
+		return l;		
+		
+	}
+	
 	
 
 }

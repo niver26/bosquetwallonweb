@@ -42,7 +42,7 @@ public class Person implements Serializable {
 		return IDperson;
 	}
 	public int getrole() {
-		return IDperson;
+		return role;
 	}
 
 	public String getFirstName() {

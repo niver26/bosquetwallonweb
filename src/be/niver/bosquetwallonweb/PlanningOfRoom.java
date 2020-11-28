@@ -1,9 +1,13 @@
 package be.niver.bosquetwallonweb;
 
 import java.io.Serializable;
+import java.sql.Connection;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
+
+import be.niver.dao.PlanningOfRoomDAO;
 
 public class PlanningOfRoom implements Serializable{
 	private static final long serialVersionUID = 7787170877756499146L;
@@ -17,6 +21,9 @@ public class PlanningOfRoom implements Serializable{
 	
 	public PlanningOfRoom() {
 		
+	}
+	public PlanningOfRoom(int iDplanningOfRoom) {
+		IDplanningOfRoom = iDplanningOfRoom;
 	}
 	
 	public PlanningOfRoom(int iDplanningOfRoom, Date biginDate, Date endDate, Booking bookin_PlanningOfRoom_fk,
@@ -84,6 +91,47 @@ public class PlanningOfRoom implements Serializable{
 				+ RoomManager_PlannigOfRoom + ", listShow=" + listShow + "]";
 	}
 
+	/**************************************************************************************/
+	/**
+	 * les fonctions de la classe
+	 * @return
+	 */
+	
+	public boolean create(Connection conn) {
+		PlanningOfRoomDAO dao = new PlanningOfRoomDAO(conn);
+		return dao.create(this);		
+		
+	}
+
+	public boolean delete(Connection conn) {
+		PlanningOfRoomDAO dao = new PlanningOfRoomDAO(conn);
+		return dao.delete(this);		
+		
+	}
+
+	public boolean update(Connection conn) {
+		PlanningOfRoomDAO dao = new PlanningOfRoomDAO(conn);
+		return dao.update(this);		
+		
+	}
+
+	public PlanningOfRoom find(Connection conn) {
+		PlanningOfRoomDAO dao = new PlanningOfRoomDAO(conn);
+		return dao.find(this.getIDplanningOfRoom());		
+		
+	}
+	
+	public ArrayList<PlanningOfRoom> findAll(Connection conn) {
+		PlanningOfRoomDAO dao = new PlanningOfRoomDAO(conn);
+		ArrayList<PlanningOfRoom> l = new ArrayList<PlanningOfRoom>();
+		for(var p : dao.findAll()) {
+			l.add((PlanningOfRoom)p);
+		}
+		return l;		
+		
+	}
+	
+	
 	
 	
 	

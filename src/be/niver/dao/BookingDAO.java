@@ -5,14 +5,12 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
+
 import java.util.ArrayList;
 
 import be.niver.bosquetwallonweb.Booking;
 import be.niver.bosquetwallonweb.Organizer;
-import be.niver.bosquetwallonweb.Person;
-import be.niver.service.Md5hash;
-import be.niver.bosquetwallonweb.Booking;
+
 
 public class BookingDAO extends DAO<Booking> {
 
@@ -100,14 +98,14 @@ public class BookingDAO extends DAO<Booking> {
 			
 			if (result.first())
 			{
-				String dateString = result.getString("bookingDate");
-				Date date =   Date.valueOf(dateString.substring(0,10));
+				String dateString1 = result.getString("bookingDate");
+				Date date =   Date.valueOf(dateString1.substring(0,10));
 				
 				Organizer organizer = new Organizer(result.getInt("organizer_Booking_fk"));
 				
 				booking = new Booking(id, result.getDouble("deposit"), result.getDouble("insurance"),
 						result.getDouble("roomBookingPrice"),	organizer, date,result.getString("optionnalService"),
-						result.getDouble("optionnalServicePrice"),result.getDouble("totalPrice"));
+						result.getDouble("optionnalServicePrice"),result.getDouble("totalPrice")); 
 				
 			}
 		
@@ -127,8 +125,8 @@ public class BookingDAO extends DAO<Booking> {
             ResultSet result = ps.executeQuery();  
             
 			while (result.next()) {
-				String dateString = result.getString("bookingDate");
-				Date date =   Date.valueOf(dateString.substring(0,10));
+				String dateString1 = result.getString("bookingDate");
+				Date date =   Date.valueOf(dateString1.substring(0,10));
 				Organizer organizer = new Organizer(result.getInt("organizer_Booking_fk"));
 				
 				Booking obj = new Booking(result.getInt("IDBooking"), result.getDouble("deposit"), result.getDouble("insurance"),

@@ -56,7 +56,7 @@ public class PersonDAO extends DAO<Person> {
 	public boolean update(Person obj) {
 		boolean result = false;
 		try {
-			 String passwordhash = new Md5hash().getMd5(obj.getPassWord());
+			 //String passwordhash = new Md5hash().getMd5(obj.getPassWord());
 			result = updateStatement(String.format("UPDATE  Person "
 					+ "SET FirstName = '%s', LastName = '%s', Adress = '%s', "
 					+ "E_Mail =  '%s', PassWord = '%s'"

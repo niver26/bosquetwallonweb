@@ -64,19 +64,7 @@ public class RoomManagerDAO extends PersonDAO {
 
 	@Override
 	public boolean update(Person person) {
-		boolean result = false;
-		try {
-			boolean result1 =super.update(person);
-			 RoomManager obj = (RoomManager) person;
-			result = updateStatement(String.format("UPDATE  RoomManager "
-					+ " WHERE IDPerson_RoomManager_fk= %s",  
-					obj.getIDPerson_RoomManager_fk()
-					));  
-		result = result && result1;
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return result;
+		return super.update(person);
 	}
 
 	@Override

@@ -1,6 +1,10 @@
 package be.niver.bosquetwallonweb;
 
 import java.io.Serializable;
+import java.sql.Connection;
+import java.util.ArrayList;
+
+import be.niver.dao.CategoryRoomDAO;
 
 public class CategoryRoom implements Serializable{
 	private static final long serialVersionUID = 7787170877756499146L;
@@ -48,6 +52,47 @@ public class CategoryRoom implements Serializable{
 	public String toString() {
 		return "CategoryRoom [IDCategoryRoom=" + IDCategoryRoom + ", IsDisponible=" + IsDisponible
 				+ ", configuration_categoryRoom_fk=" + configuration_categoryRoom_fk + "]";
+	}
+	
+	
+	/**************************************************************************************/
+	/**
+	 * les fonctions de la classe
+	 * @return
+	 */
+	
+	public boolean create(Connection conn) {
+		CategoryRoomDAO dao = new CategoryRoomDAO(conn);
+		return dao.create(this);		
+		
+	}
+
+	public boolean delete(Connection conn) {
+		CategoryRoomDAO dao = new CategoryRoomDAO(conn);
+		return dao.delete(this);		
+		
+	}
+
+	public boolean update(Connection conn) {
+		CategoryRoomDAO dao = new CategoryRoomDAO(conn);
+		return dao.update(this);		
+		
+	}
+
+	public CategoryRoom find(Connection conn) {
+		CategoryRoomDAO dao = new CategoryRoomDAO(conn);
+		return dao.find(this.getIDCategoryRoom());		
+		
+	}
+	
+	public ArrayList<CategoryRoom> findAll(Connection conn) {
+		CategoryRoomDAO dao = new CategoryRoomDAO(conn);
+		ArrayList<CategoryRoom> l = new ArrayList<CategoryRoom>();
+		for(var p : dao.findAll()) {
+			l.add((CategoryRoom)p);
+		}
+		return l;		
+		
 	}
 	
 	

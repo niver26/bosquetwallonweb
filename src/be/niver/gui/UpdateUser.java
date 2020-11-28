@@ -15,6 +15,8 @@ import javax.swing.JButton;
 import java.awt.SystemColor;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import com.toedter.calendar.JCalendar;
+import com.toedter.calendar.JDateChooser;
 
 public class UpdateUser extends JFrame {
 
@@ -125,5 +127,13 @@ public class UpdateUser extends JFrame {
 		textFieldNomUpdateuser.setFont(new Font("Vivaldi", Font.BOLD, 20));
 		textFieldNomUpdateuser.setColumns(10);
 		contentPane.add(textFieldNomUpdateuser);
+		
+		JCalendar calendar = new JCalendar();
+		calendar.setBounds(423, 130, 213, 152);
+		contentPane.add(calendar);
+		
+		JDateChooser dateChooser = new JDateChooser();
+		dateChooser.setBounds(125, 73, 281, 46);
+		contentPane.add(dateChooser);
 	}
 }

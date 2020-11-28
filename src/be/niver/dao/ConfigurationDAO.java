@@ -102,7 +102,7 @@ public class ConfigurationDAO extends DAO<Configuration> {
 	public ArrayList<Configuration> findAll() {
 		ArrayList<Configuration> objs = new ArrayList<Configuration>();
 		try {
-			PreparedStatement ps = connect.prepareStatement(String.format("SELECT * FROM Configuration as Ca INNER JOIN Configuration as Co on Ca.configuration_categoryRoom_fk = Co.IDConfiguration "), 
+			PreparedStatement ps = connect.prepareStatement(String.format("SELECT * FROM Configuration as Ca INNER JOIN Show as S on Ca.show_configuration_fk = S.IDShow "), 
 					ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);  
             ResultSet result = ps.executeQuery();  
             

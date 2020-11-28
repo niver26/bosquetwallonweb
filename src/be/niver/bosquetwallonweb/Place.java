@@ -1,8 +1,12 @@
 package be.niver.bosquetwallonweb;
 
 import java.io.Serializable;
+import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
+
+import be.niver.dao.PlaceDAO;
 
 public class Place implements Serializable{
 	private static final long serialVersionUID = 7787170877756499146L;
@@ -88,5 +92,47 @@ public class Place implements Serializable{
 				+ isDispobible + ", order_place_fk=" + order_place_fk + ", listRepresentation=" + listRepresentation
 				+ "]";
 	}
+	
+	
+	/**************************************************************************************/
+	/**
+	 * les fonctions de la classe
+	 * @return
+	 */
+	
+	public boolean create(Connection conn) {
+		PlaceDAO dao = new PlaceDAO(conn);
+		return dao.create(this);		
+		
+	}
+
+	public boolean delete(Connection conn) {
+		PlaceDAO dao = new PlaceDAO(conn);
+		return dao.delete(this);		
+		
+	}
+
+	public boolean update(Connection conn) {
+		PlaceDAO dao = new PlaceDAO(conn);
+		return dao.update(this);		
+		
+	}
+
+	public Place find(Connection conn) {
+		PlaceDAO dao = new PlaceDAO(conn);
+		return dao.find(this.getIDPlace());		
+		
+	}
+	
+	public ArrayList<Place> findAll(Connection conn) {
+		PlaceDAO dao = new PlaceDAO(conn);
+		ArrayList<Place> l = new ArrayList<Place>();
+		for(var p : dao.findAll()) {
+			l.add((Place)p);
+		}
+		return l;		
+		
+	}
+	
 	
 }

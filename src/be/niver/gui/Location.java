@@ -62,11 +62,11 @@ public class Location extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblLocationtitre = new JLabel("Formulaire De Location");
+		JLabel lblLocationtitre = new JLabel("Formulaire De Reservation");
 		lblLocationtitre.setHorizontalAlignment(SwingConstants.CENTER);
 		lblLocationtitre.setForeground(Color.BLUE);
 		lblLocationtitre.setFont(new Font("Vivaldi", Font.BOLD | Font.ITALIC, 40));
-		lblLocationtitre.setBounds(517, 10, 420, 46);
+		lblLocationtitre.setBounds(517, 10, 565, 46);
 		contentPane.add(lblLocationtitre);
 		
 		JLabel lblJour = new JLabel("Jour");

@@ -86,7 +86,7 @@ public class OrderDAO extends DAO<Order> {
 			if (result.first())
 			{
 				
-				Spectator  spectator = new Spectator(result.getInt("IDShow"));
+				Spectator  spectator = new Spectator(result.getInt("spectator_oder_fk"));
 				obj = new Order(id, spectator, result.getString("paymentMethod"), result.getString("DeliveryMethod"),result.getInt("price"));
 				
 			}
@@ -107,7 +107,7 @@ public class OrderDAO extends DAO<Order> {
             ResultSet result = ps.executeQuery();  
             
 			while (result.next()) {
-				Spectator  spectator = new Spectator(result.getInt("IDShow"));
+				Spectator  spectator = new Spectator(result.getInt("spectator_oder_fk"));
 				Order obj = new Order(result.getInt("IDOrder"), spectator, result.getString("paymentMethod"), result.getString("DeliveryMethod"),result.getInt("price"));
 				
 				objs.add(obj);

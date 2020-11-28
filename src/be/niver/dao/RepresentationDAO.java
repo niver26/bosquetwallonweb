@@ -92,7 +92,7 @@ public class RepresentationDAO extends DAO<Representation> {
 				String heureString2 = result.getString("EndTime");
 				Time heurefin =   Time.valueOf(heureString2.substring(0, 10));*/
 				
-				Place  place = new Place(result.getInt("IDBooking"));
+				Place  place = new Place(result.getInt("IDPlace"));
 				obj = new Representation(id, result.getTime("BiginTime"), result.getTime("EndTime"), place);
 				
 			}
@@ -120,7 +120,7 @@ public class RepresentationDAO extends DAO<Representation> {
 				String heureString2 = result.getString("EndTime");
 				Time heurefin =   Time.valueOf(heureString2.substring(0, 10));*/
 				
-				Place  place = new Place(result.getInt("IDBooking"));
+				Place  place = new Place(result.getInt("IDPlace"));
 				Representation obj = new Representation(result.getInt("IDRepresentation"), result.getTime("BiginTime"), result.getTime("EndTime"), place);
 				objs.add(obj);
 			}

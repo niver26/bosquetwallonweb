@@ -1,8 +1,12 @@
 package be.niver.bosquetwallonweb;
 
 import java.io.Serializable;
+import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
+
+import be.niver.dao.ShowDAO;
 
 public class Show implements Serializable{
 	private static final long serialVersionUID = 7787170877756499146L;
@@ -96,4 +100,45 @@ public class Show implements Serializable{
 				+ ", listConfiguration=" + listConfiguration + ", listRepresentation=" + listRepresentation + "]";
 	}
 
+	
+	/**************************************************************************************/
+	/**
+	 * les fonctions de la classe
+	 * @return
+	 */
+	
+	public boolean create(Connection conn) {
+		ShowDAO dao = new ShowDAO(conn);
+		return dao.create(this);		
+		
+	}
+
+	public boolean delete(Connection conn) {
+		ShowDAO dao = new ShowDAO(conn);
+		return dao.delete(this);		
+		
+	}
+
+	public boolean update(Connection conn) {
+		ShowDAO dao = new ShowDAO(conn);
+		return dao.update(this);		
+		
+	}
+
+	public Show find(Connection conn) {
+		ShowDAO dao = new ShowDAO(conn);
+		return dao.find(this.getIDShow());		
+		
+	}
+	
+	public ArrayList<Show> findAll(Connection conn) {
+		ShowDAO dao = new ShowDAO(conn);
+		ArrayList<Show> l = new ArrayList<Show>();
+		for(var p : dao.findAll()) {
+			l.add((Show)p);
+		}
+		return l;		
+		
+	}
+	
 }
