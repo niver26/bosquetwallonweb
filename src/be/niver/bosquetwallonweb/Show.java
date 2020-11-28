@@ -36,7 +36,6 @@ public class Show implements Serializable{
 	
 	public Show(int iDShow, String title, Representation representation_show_fk, PlanningOfRoom planning_show_fk,
 			Organizer organizer_show_fk) {
-		super();
 		IDShow = iDShow;
 		this.title = title;
 		this.representation_show_fk = representation_show_fk;
@@ -95,9 +94,8 @@ public class Show implements Serializable{
 	
 	@Override
 	public String toString() {
-		return "Show [IDShow=" + IDShow + ", title=" + title + ", representation_show_fk=" + representation_show_fk
-				+ ", planning_show_fk=" + planning_show_fk + ", Organizer_show_fk=" + Organizer_show_fk
-				+ ", listConfiguration=" + listConfiguration + ", listRepresentation=" + listRepresentation + "]";
+		return "Numero Spectacle" + IDShow + ", title=" + title + ", representation_show_fk=" + representation_show_fk
+				+ ", planning_show_fk=" + planning_show_fk + ", Organizer_show_fk=" + Organizer_show_fk ;
 	}
 
 	

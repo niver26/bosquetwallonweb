@@ -22,10 +22,10 @@ public class PlanningOfRoomDAO extends DAO<PlanningOfRoom>{
 	public boolean create(PlanningOfRoom obj) { 
 		boolean result = false;
 		try {
-			result = updateStatement(String.format("INSERT INTO PlanningOfRoom VALUES ( 0 ,'%s','%s', %s, %s)",  
+			result = updateStatement(String.format("INSERT INTO PlanningOfRoom VALUES ( 0 ,'%s','%s', %s)",  
 					obj.getBiginDate(),
 					obj.getEndDate(),
-					obj.getBookin_PlanningOfRoom_fk().getIDBooking(),
+					
 					obj.getRoomManager_PlannigOfRoom().getIDPerson_RoomManager_fk()
 					));  
 		
@@ -57,11 +57,10 @@ public class PlanningOfRoomDAO extends DAO<PlanningOfRoom>{
 		boolean result = false;
 		try {
 			result = updateStatement(String.format("UPDATE  PlanningOfRoom "
-					+ "SET BiginDate = '%s', EndDate = '%s', bookin_PlanningOfRoom_fk= %s , RoomManager_PlannigOfRoom = %s "
+					+ "SET BiginDate = '%s', EndDate = '%s', RoomManager_PlannigOfRoom = %s "
 					+ " WHERE IDplanningOfRoom = %s", 
 					obj.getBiginDate(),
 					obj.getEndDate(),
-					obj.getBookin_PlanningOfRoom_fk().getIDBooking(),
 					obj.getRoomManager_PlannigOfRoom().getIDPerson_RoomManager_fk(),
 					obj.getIDplanningOfRoom()
 					));  
@@ -83,7 +82,6 @@ public class PlanningOfRoomDAO extends DAO<PlanningOfRoom>{
 			ResultSet result = this.connect
 					.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY)
 					.executeQuery("SELECT * FROM PlanningOfRoom as pl "
-							+ " INNER JOIN Booking as B on pl.bookin_PlanningOfRoom_fk= B.IDBooking "
 							+ " INNER JOIN RoomManager as R on pl.RoomManager_PlannigOfRoom_fk= R.IDPerson_RoomManager_fk "
 							+ " WHERE IDplanningOfRoom = " + id);
 		
@@ -95,10 +93,9 @@ public class PlanningOfRoomDAO extends DAO<PlanningOfRoom>{
 				String dateString2 = result.getString("EndDate");
 				Date datefin =   Date.valueOf(dateString2.substring(0,10));
 				
-				Booking  booking = new Booking(result.getInt("IDBooking"));
 				RoomManager roomManager = new RoomManager(result.getInt("IDPerson_RoomManager_fk"));
 				
-				obj = new PlanningOfRoom(id, datedebut, datefin,booking, roomManager);
+				obj = new PlanningOfRoom(id, datedebut, datefin, roomManager);
 				
 			}
 		
@@ -114,7 +111,6 @@ public class PlanningOfRoomDAO extends DAO<PlanningOfRoom>{
 		ArrayList<PlanningOfRoom> objs = new ArrayList<PlanningOfRoom>();
 		try {
 			PreparedStatement ps = connect.prepareStatement(String.format("SELECT * FROM PlanningOfRoom as pl "
-					+ " INNER JOIN Booking as B on pl.bookin_PlanningOfRoom_fk= B.IDBooking "
 					+ " INNER JOIN RoomManager as R on pl.RoomManager_PlannigOfRoom_fk= R.IDPerson_RoomManager_fk "), 
 					ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);  
             ResultSet result = ps.executeQuery();  
@@ -126,10 +122,10 @@ public class PlanningOfRoomDAO extends DAO<PlanningOfRoom>{
 				String dateString2 = result.getString("EndDate");
 				Date datefin =   Date.valueOf(dateString2.substring(0,10));
 				
-				Booking  booking = new Booking(result.getInt("IDBooking"));
+				
 				RoomManager roomManager = new RoomManager(result.getInt("IDPerson_RoomManager_fk"));
 				
-				PlanningOfRoom obj = new PlanningOfRoom(result.getInt("IDplanningOfRoom"), datedebut, datefin,booking, roomManager);
+				PlanningOfRoom obj = new PlanningOfRoom(result.getInt("IDplanningOfRoom"), datedebut, datefin, roomManager);
 				objs.add(obj);
 			}
 		

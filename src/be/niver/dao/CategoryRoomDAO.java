@@ -23,9 +23,10 @@ public class CategoryRoomDAO extends DAO<CategoryRoom>  {
 	public boolean create(CategoryRoom obj) { 
 		boolean result = false;
 		try {
-			result = updateStatement(String.format("INSERT INTO CategoryRoom VALUES ( 0 ,'%s', %s)",  
-					obj.isIsDisponible(),
-					obj.getConfiguration_categoryRoom_fk().getIDConfiguration()
+			result = updateStatement(String.format("INSERT INTO CategoryRoom VALUES ( 0 ,%s, %s,  %s)",  
+					obj.getConfiguration_categoryRoom_fk().getIDConfiguration(),
+					obj.getPlaceMax(),
+					obj.getNbePlace()
 					));  
 		
 		} catch (SQLException e) {
@@ -54,10 +55,11 @@ public class CategoryRoomDAO extends DAO<CategoryRoom>  {
 		boolean result = false;
 		try {
 			result = updateStatement(String.format("UPDATE  CategoryRoom "
-					+ "SET IsDisponible = '%s', configuration_categoryRoom_fk = %s"
+					+ "SET configuration_categoryRoom_fk = %s, placemax = %s, nbrPlace = %s  "
 					+ " WHERE IDCategoryRoom = %s", 
-					obj.isIsDisponible(),
 					obj.getConfiguration_categoryRoom_fk().getIDConfiguration(),
+					obj.getPlaceMax(),
+					obj.getNbePlace(),
 					obj.getIDCategoryRoom()
 					));  
 			//System.out.println("update CategoryRoom is "+ result);
@@ -82,7 +84,7 @@ public class CategoryRoomDAO extends DAO<CategoryRoom>  {
 			if (result.first())
 			{
 				Configuration  configuration = new Configuration(result.getInt("IDConfiguration"));
-				obj = new CategoryRoom(id, result.getBoolean("IsDisponible"),configuration);
+				obj = new CategoryRoom(id,  result.getInt("nbrPlace"),result.getInt("placemax"), configuration );
 			}
 	
 		} catch (SQLException e) {
@@ -102,7 +104,7 @@ public class CategoryRoomDAO extends DAO<CategoryRoom>  {
 			while (result.next()) {
 				
 				Configuration  configuration = new Configuration(result.getInt("IDConfiguration"));
-				CategoryRoom	obj = new CategoryRoom(result.getInt("IDCategoryRoom"), result.getBoolean("IsDisponible"),configuration);
+				CategoryRoom	obj = new CategoryRoom(result.getInt("IDCategoryRoom"),  result.getInt("nbrPlace"),result.getInt("placemax"), configuration );
 				objs.add(obj);
 			}
 		

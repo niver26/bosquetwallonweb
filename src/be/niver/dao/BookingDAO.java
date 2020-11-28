@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 import be.niver.bosquetwallonweb.Booking;
 import be.niver.bosquetwallonweb.Organizer;
+import be.niver.bosquetwallonweb.PlanningOfRoom;
 
 
 public class BookingDAO extends DAO<Booking> {
@@ -23,14 +24,15 @@ public class BookingDAO extends DAO<Booking> {
 	public boolean create(Booking obj) { 
 		boolean result = false;
 		try {
-			result = updateStatement(String.format("INSERT INTO Booking VALUES ( 0 ,%s, %s, %s, %s, '%s', '%s', %s, %s)",  
+			result = updateStatement(String.format("INSERT INTO Booking VALUES ( 0 ,%s, %s, %s, %s, '%s', '%s', %s, %s, %s)",  
 					obj.getDeposit(),
 					obj.getInsurance(),
 					obj.getOrganizer_Booking_fk().getIDPerson_Organizer_fk(),
 					obj.getBookingDate(),
 					obj.getOptionnalService(),
 					obj.getOptionnalServicePrice(),
-					obj.getTotalPrice()
+					obj.getTotalPrice(),
+					obj.getPlanninOfRoom().getIDplanningOfRoom()
 					));  
 		
 		} catch (SQLException e) {
@@ -63,7 +65,7 @@ public class BookingDAO extends DAO<Booking> {
 			result = updateStatement(String.format("UPDATE  Booking "
 					+ "SET deposit = %s, insurance = %s, roomBookingPrice = %s, "
 					+ "organizer_Booking_fk =  %s, bookingDate = '%s', optionnalService = '%s'"
-					+ "optionnalServicePrice = %s, totalPrice = %s"
+					+ "optionnalServicePrice = %s, totalPrice = %s, PlanningRoomId = %s"
 					+ " WHERE IDBooking = %s",  
 					obj.getDeposit(),
 					obj.getInsurance(),
@@ -72,6 +74,7 @@ public class BookingDAO extends DAO<Booking> {
 					obj.getOptionnalService(),
 					obj.getOptionnalServicePrice(),
 					obj.getTotalPrice(),
+					obj.getPlanninOfRoom().getIDplanningOfRoom(),
 					obj.getIDBooking()
 					));  
 			//System.out.println("update Booking is "+ result);
@@ -102,10 +105,10 @@ public class BookingDAO extends DAO<Booking> {
 				Date date =   Date.valueOf(dateString1.substring(0,10));
 				
 				Organizer organizer = new Organizer(result.getInt("organizer_Booking_fk"));
-				
+				PlanningOfRoom planninOfRoom = new PlanningOfRoom(result.getInt("PlanningRoomId")).find(be.niver.connect.ConnectDataBase.getInstance());
 				booking = new Booking(id, result.getDouble("deposit"), result.getDouble("insurance"),
 						result.getDouble("roomBookingPrice"),	organizer, date,result.getString("optionnalService"),
-						result.getDouble("optionnalServicePrice"),result.getDouble("totalPrice")); 
+						result.getDouble("optionnalServicePrice"),result.getDouble("totalPrice"),planninOfRoom ); 
 				
 			}
 		
@@ -128,10 +131,10 @@ public class BookingDAO extends DAO<Booking> {
 				String dateString1 = result.getString("bookingDate");
 				Date date =   Date.valueOf(dateString1.substring(0,10));
 				Organizer organizer = new Organizer(result.getInt("organizer_Booking_fk"));
-				
+				PlanningOfRoom planninOfRoom = new PlanningOfRoom(result.getInt("PlanningRoomId")).find(be.niver.connect.ConnectDataBase.getInstance());
 				Booking obj = new Booking(result.getInt("IDBooking"), result.getDouble("deposit"), result.getDouble("insurance"),
 						result.getDouble("roomBookingPrice"),	organizer, date,result.getString("optionnalService"),
-						result.getDouble("optionnalServicePrice"),result.getDouble("totalPrice"));
+						result.getDouble("optionnalServicePrice"),result.getDouble("totalPrice"),planninOfRoom);
 				
 				objs.add(obj);
 			}

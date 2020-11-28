@@ -15,7 +15,7 @@ public class PlanningOfRoom implements Serializable{
 	private int IDplanningOfRoom;
 	private Date BiginDate;
 	private Date EndDate;
-	private Booking bookin_PlanningOfRoom_fk;
+	
 	private RoomManager RoomManager_PlannigOfRoom;
 	private Set<Show> listShow = new HashSet<>();
 	
@@ -26,13 +26,12 @@ public class PlanningOfRoom implements Serializable{
 		IDplanningOfRoom = iDplanningOfRoom;
 	}
 	
-	public PlanningOfRoom(int iDplanningOfRoom, Date biginDate, Date endDate, Booking bookin_PlanningOfRoom_fk,
+	public PlanningOfRoom(int iDplanningOfRoom, Date biginDate, Date endDate,
 			RoomManager roomManager_PlannigOfRoom) {
 		
 		IDplanningOfRoom = iDplanningOfRoom;
 		BiginDate = biginDate;
 		EndDate = endDate;
-		this.bookin_PlanningOfRoom_fk = bookin_PlanningOfRoom_fk;
 		RoomManager_PlannigOfRoom = roomManager_PlannigOfRoom;
 	}
 	
@@ -46,10 +45,6 @@ public class PlanningOfRoom implements Serializable{
 
 	public Date getEndDate() {
 		return EndDate;
-	}
-
-	public Booking getBookin_PlanningOfRoom_fk() {
-		return bookin_PlanningOfRoom_fk;
 	}
 
 	public RoomManager getRoomManager_PlannigOfRoom() {
@@ -72,9 +67,7 @@ public class PlanningOfRoom implements Serializable{
 		EndDate = endDate;
 	}
 
-	public void setBookin_PlanningOfRoom_fk(Booking bookin_PlanningOfRoom_fk) {
-		this.bookin_PlanningOfRoom_fk = bookin_PlanningOfRoom_fk;
-	}
+	
 
 	public void setRoomManager_PlannigOfRoom(RoomManager roomManager_PlannigOfRoom) {
 		RoomManager_PlannigOfRoom = roomManager_PlannigOfRoom;
@@ -86,9 +79,9 @@ public class PlanningOfRoom implements Serializable{
 	
 	@Override
 	public String toString() {
-		return "PlanningOfRoom [IDplanningOfRoom=" + IDplanningOfRoom + ", BiginDate=" + BiginDate + ", EndDate="
-				+ EndDate + ", bookin_PlanningOfRoom_fk=" + bookin_PlanningOfRoom_fk + ", RoomManager_PlannigOfRoom="
-				+ RoomManager_PlannigOfRoom + ", listShow=" + listShow + "]";
+		return "PlanningOfRoom " + IDplanningOfRoom + ", BiginDate=" + BiginDate + ", EndDate="
+				+ EndDate + "numero reservation :="
+				+ RoomManager_PlannigOfRoom;
 	}
 
 	/**************************************************************************************/

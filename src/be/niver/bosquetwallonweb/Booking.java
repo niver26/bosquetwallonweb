@@ -21,7 +21,8 @@ public class Booking implements Serializable {
 	private String optionnalService;
 	private double optionnalServicePrice;
 	private double totalPrice;
-	private Set<PlanningOfRoom> listPlanningOfRoom = new HashSet<>();
+	private PlanningOfRoom planninOfRoom;
+	//private Set<PlanningOfRoom> listPlanningOfRoom = new HashSet<>();
 
 	public Booking() {
 		
@@ -33,7 +34,7 @@ public class Booking implements Serializable {
 	
 	public Booking(int iDBooking, double deposit, double insurance, double roomBookingPrice,
 			Organizer organizer_Booking_fk, Date bookingDate, String optionnalService, double optionnalServicePrice,
-			double totalPrice) {
+			double totalPrice, PlanningOfRoom planninOfRoom) {
 		
 		IDBooking = iDBooking;
 		this.deposit = deposit;
@@ -44,16 +45,9 @@ public class Booking implements Serializable {
 		this.optionnalService = optionnalService;
 		this.optionnalServicePrice = optionnalServicePrice;
 		this.totalPrice = totalPrice;
+		this.planninOfRoom =  planninOfRoom;
 	}
 
-	public Set<PlanningOfRoom> getListPlanningOfRoom() {
-		return listPlanningOfRoom;
-	}
-
-	public void setListPlanningOfRoom(Set<PlanningOfRoom> listPlanningOfRoom) {
-		this.listPlanningOfRoom = listPlanningOfRoom;
-	}
-	
 	public int getIDBooking() {
 		return IDBooking;
 	}
@@ -73,6 +67,14 @@ public class Booking implements Serializable {
 		return roomBookingPrice;
 	}
 
+
+	public PlanningOfRoom getPlanninOfRoom() {
+		return planninOfRoom;
+	}
+
+	public void setPlanninOfRoom(PlanningOfRoom planninOfRoom) {
+		this.planninOfRoom = planninOfRoom;
+	}
 
 	public Organizer getOrganizer_Booking_fk() {
 		return organizer_Booking_fk;
@@ -148,7 +150,7 @@ public class Booking implements Serializable {
 		return "Booking [IDBooking=" + IDBooking + ", deposit=" + deposit + ", insurance=" + insurance
 				+ ", roomBookingPrice=" + roomBookingPrice + ", organizer_Booking_fk=" + organizer_Booking_fk
 				+ ", bookingDate=" + bookingDate + ", optionnalService=" + optionnalService + ", optionnalServicePrice="
-				+ optionnalServicePrice + ", totalPrice=" + totalPrice + ", listPlanningOfRoom=" + listPlanningOfRoom
+				+ optionnalServicePrice + ", totalPrice=" + totalPrice
 				+ "]";
 	}
 	

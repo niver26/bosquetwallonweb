@@ -87,9 +87,8 @@ public class Order implements Serializable{
 	
 	@Override
 	public String toString() {
-		return "Order [IDOrder=" + IDOrder + ", spectator_oder_fk=" + spectator_oder_fk + ", paymentMethod="
-				+ paymentMethod + ", DeliveryMethod=" + DeliveryMethod + ", price=" + price + ", listPlace=" + listPlace
-				+ "]";
+		return "numero commande " + IDOrder + "numero Spectateur" + spectator_oder_fk + "methode de paiement="
+				+ paymentMethod + "methode de livraison =" + DeliveryMethod + "prix =" + price;
 	}
 
 	
