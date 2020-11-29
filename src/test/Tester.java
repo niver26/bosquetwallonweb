@@ -1,5 +1,7 @@
 package test;
 
+import java.sql.Date;
+
 import be.niver.bosquetwallonweb.*;
 import be.niver.dao.*;
 
@@ -10,7 +12,7 @@ public class Tester {
 			
 			/*System.out.print("***************** Artist **************************\n");
 			DAO<Person> artistDAO = new ArtistDAO(be.niver.connect.ConnectDataBase.getInstance());
-			for (int i = 1; i < 3; i++) {
+			for (int i = 1; i < 6; i++) {
 				Artist artist = (Artist) artistDAO.find(i);
 				System.out.println("Artist N°: " + artist.getIDPerson_Artiste_fk() + "  Nom:  " + artist.getFirstName() + "  Prenom: " + artist.getLastName()
 				+ "  Adresse:  " + artist.getAdress() + "  E_Mail: " + artist.getE_Mail()+ "  mot de passe:  " + artist.getPassWord()+
@@ -85,8 +87,21 @@ public class Tester {
 				+ "  service optionnel:  " + booking.getOptionnalService() + "  Prix des service optionnel: " + booking.getOptionnalServicePrice()+ "  Prix Reservation:  " + booking.getRoomBookingPrice() + "  prix total: "
 						+booking.getTotalPrice()+"  date de reservation: " + booking.getBookingDate());
 			
-			}
-			*/
+				
+				
+			}*/
+		/*Booking booking = new Booking(0, 1000.0, 4000.0, 10.22,
+				new Organizer(4), Date.valueOf("2021-01-03"), "barman", 78.55,
+				7.88, new PlanningOfRoom(4));
+		
+		var result = booking.create(be.niver.connect.ConnectDataBase.getInstance());
+		
+		*/
+			 
+			
+			
+			
+			
 		
 		/*DAO<Person> artistDAO = new ArtistDAO(be.niver.connect.ConnectDataBase.getInstance());
 		Artist artist = (Artist) artistDAO.find(1);
@@ -248,6 +263,11 @@ public class Tester {
 			PlanningOfRoom planningOfRoom = (PlanningOfRoom)p;
 			System.out.println(planningOfRoom);
 		}*/
+		
+		var result = new PlanningOfRoom().findAllNotBooking(be.niver.connect.ConnectDataBase.getInstance());
+		for(var p : result ) 
+			System.out.println(p);
+		
 		
 		/*System.out.print("***************** Show **************************\n");
 		DAO<Show> showDAO = new ShowDAO(be.niver.connect.ConnectDataBase.getInstance());

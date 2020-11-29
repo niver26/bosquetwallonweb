@@ -26,6 +26,9 @@ import be.niver.dao.PersonDAO;
 		
 	}
 	
+	public Artist(int iDPerson) {
+		IDPerson_Artiste_fk = iDPerson;
+	}
 	public Artist(int iDPerson, String firstName, String lastName, String adress, String email, String passWord,int Role, Show showArtiste,
 			String speciality) {
 		super(iDPerson, firstName, lastName, adress, email, passWord, Role);
@@ -74,8 +77,13 @@ import be.niver.dao.PersonDAO;
 	
 	@Override
 	public String toString() {
-		return "Artist [IDPerson_Artiste_fk=" + IDPerson_Artiste_fk + ", ShowArtiste=" + ShowArtiste
+		return "Nom: [IDPerson_Artiste_fk=" + IDPerson_Artiste_fk + ", ShowArtiste=" + ShowArtiste
 				+ ", Speciality=" + Speciality + "]";
+	}
+	
+	public String Affiche() {
+		return "   Spectialisté : "+ this.getSpeciality()+ "   Nom : " +this.getFirstName();
+				
 	}
 	
 	@Override
@@ -112,5 +120,7 @@ import be.niver.dao.PersonDAO;
 		return dao.login(this.getE_Mail(), this.getPassWord());		
 		
 	}
+	
+	
 	
 }

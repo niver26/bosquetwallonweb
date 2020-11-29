@@ -19,25 +19,63 @@ public class BookingDAO extends DAO<Booking> {
 		super(conn);
 		
 	}
-
+//( 0 ,%s, %s, %s, %s,'%s', '%s', %s, %s, %s )
+	/*
+	 				* obj.getDeposit(),
+					obj.getInsurance(),
+					obj.getRoomBookingPrice(),
+					obj.getOrganizer_Booking_fk().getIDPerson_Organizer_fk(),
+					obj.getBookingDate(),
+					obj.getOptionnalService(),
+					obj.getOptionnalServicePrice(),
+					obj.getTotalPrice(),
+				
+	 */
 	@Override
 	public boolean create(Booking obj) { 
 		boolean result = false;
 		try {
-			result = updateStatement(String.format("INSERT INTO Booking VALUES ( 0 ,%s, %s, %s, %s, '%s', '%s', %s, %s, %s)",  
+		System.out.println(obj);
+		/*
+			result = updateStatement(String.format("INSERT INTO Booking VALUES ( 0 ,%s, %s, %s, %s,'%s', '%s', %s, %s, %s )" ,
 					obj.getDeposit(),
 					obj.getInsurance(),
+					obj.getRoomBookingPrice(),
 					obj.getOrganizer_Booking_fk().getIDPerson_Organizer_fk(),
 					obj.getBookingDate(),
 					obj.getOptionnalService(),
 					obj.getOptionnalServicePrice(),
 					obj.getTotalPrice(),
 					obj.getPlanninOfRoom().getIDplanningOfRoom()
+					
+					
 					));  
+			*/
+			
+		 PreparedStatement ps = connect.prepareStatement("INSERT INTO Booking(deposit, "
+					+ "insurance,"
+					+ "roomBookingPrice, organizer_Booking_fk,bookingDate,"
+					+ "optionnalService, optionnalServicePrice, "
+					+ "totalPrice, PlanningRoomId ) VALUES ( ?, ?,?, ?,?,?,?,?,?)" ); 
+		 ps.setDouble(1,obj.getDeposit());
+		 ps.setDouble(2,obj.getInsurance());
+		 ps.setDouble(3,obj.getRoomBookingPrice());
+		 ps.setObject(4, obj.getOrganizer_Booking_fk().getIDPerson_Organizer_fk()); 
+		 ps.setDate(5, obj.getBookingDate());
+		 ps.setString(6, obj.getOptionnalService());
+		 ps.setDouble(7,obj.getOptionnalServicePrice());
+		 ps.setDouble(8,obj.getTotalPrice());
+		 ps.setObject(9, obj.getPlanninOfRoom().getIDplanningOfRoom());
+		  int result1 = ps.executeUpdate();
+		  System.out.println("update result is "+ result1);  
+		  result = result1 >0;
+			
+			
 		
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
 		return result;
 	}
 

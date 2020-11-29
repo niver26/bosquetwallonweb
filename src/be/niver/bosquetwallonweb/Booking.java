@@ -21,7 +21,7 @@ public class Booking implements Serializable {
 	private String optionnalService;
 	private double optionnalServicePrice;
 	private double totalPrice;
-	private PlanningOfRoom planninOfRoom;
+	private PlanningOfRoom planningOfRoom;
 	//private Set<PlanningOfRoom> listPlanningOfRoom = new HashSet<>();
 
 	public Booking() {
@@ -45,7 +45,7 @@ public class Booking implements Serializable {
 		this.optionnalService = optionnalService;
 		this.optionnalServicePrice = optionnalServicePrice;
 		this.totalPrice = totalPrice;
-		this.planninOfRoom =  planninOfRoom;
+		this.planningOfRoom =  planninOfRoom;
 	}
 
 	public int getIDBooking() {
@@ -69,11 +69,11 @@ public class Booking implements Serializable {
 
 
 	public PlanningOfRoom getPlanninOfRoom() {
-		return planninOfRoom;
+		return planningOfRoom;
 	}
 
 	public void setPlanninOfRoom(PlanningOfRoom planninOfRoom) {
-		this.planninOfRoom = planninOfRoom;
+		this.planningOfRoom = planninOfRoom;
 	}
 
 	public Organizer getOrganizer_Booking_fk() {
@@ -150,7 +150,7 @@ public class Booking implements Serializable {
 		return "Booking [IDBooking=" + IDBooking + ", deposit=" + deposit + ", insurance=" + insurance
 				+ ", roomBookingPrice=" + roomBookingPrice + ", organizer_Booking_fk=" + organizer_Booking_fk
 				+ ", bookingDate=" + bookingDate + ", optionnalService=" + optionnalService + ", optionnalServicePrice="
-				+ optionnalServicePrice + ", totalPrice=" + totalPrice
+				+ optionnalServicePrice + ", totalPrice=" + totalPrice  + " planning : " +planningOfRoom
 				+ "]";
 	}
 	

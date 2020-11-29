@@ -124,6 +124,16 @@ public class PlanningOfRoom implements Serializable{
 		
 	}
 	
+	public ArrayList<PlanningOfRoom> findAllNotBooking(Connection conn){
+		PlanningOfRoomDAO dao = new PlanningOfRoomDAO(conn);
+		ArrayList<PlanningOfRoom> l = new ArrayList<PlanningOfRoom>();
+		for(var p : dao.findAllNotBooking()) {
+			l.add((PlanningOfRoom)p);
+		}
+		return l;		
+		
+	}
+	
 	
 	
 	

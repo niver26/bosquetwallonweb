@@ -25,7 +25,6 @@ public class PlanningOfRoomDAO extends DAO<PlanningOfRoom>{
 			result = updateStatement(String.format("INSERT INTO PlanningOfRoom VALUES ( 0 ,'%s','%s', %s)",  
 					obj.getBiginDate(),
 					obj.getEndDate(),
-					
 					obj.getRoomManager_PlannigOfRoom().getIDPerson_RoomManager_fk()
 					));  
 		
@@ -63,6 +62,7 @@ public class PlanningOfRoomDAO extends DAO<PlanningOfRoom>{
 					obj.getEndDate(),
 					obj.getRoomManager_PlannigOfRoom().getIDPerson_RoomManager_fk(),
 					obj.getIDplanningOfRoom()
+					
 					));  
 			//System.out.println("update PlanningOfRoom is "+ result);
 		
@@ -135,5 +135,39 @@ public class PlanningOfRoomDAO extends DAO<PlanningOfRoom>{
 		return objs;
 	}
 	
+	
+	/*
+	 * + " INNER JOIN Booking as B on b.PlanningRoomId = pl.IDplanningOfRoom  "
+					+ " WHERE pl.IDplanningOfRoom != b.PlanningRoomId "), 
+	 */
+	public ArrayList<PlanningOfRoom> findAllNotBooking() {
+		ArrayList<PlanningOfRoom> objs = new ArrayList<PlanningOfRoom>();
+		try {
+			PreparedStatement ps = connect.prepareStatement(String.format("SELECT * FROM PlanningOfRoom as pl "
+					+ " INNER JOIN RoomManager as R on pl.RoomManager_PlannigOfRoom_fk= R.IDPerson_RoomManager_fk  "
+					+ "WHERE pl.IDplanningOfRoom  NOT IN(SELECT B.PlanningRoomId FROM Booking as B) "), 
+					
+					ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);  
+            ResultSet result = ps.executeQuery();  
+            
+			while (result.next()) {
+				String dateString1 = result.getString("BiginDate");
+				Date datedebut =   Date.valueOf(dateString1.substring(0,10));
+				
+				String dateString2 = result.getString("EndDate");
+				Date datefin =   Date.valueOf(dateString2.substring(0,10));
+				
+				
+				RoomManager roomManager = new RoomManager(result.getInt("IDPerson_RoomManager_fk"));
+				
+				PlanningOfRoom obj = new PlanningOfRoom(result.getInt("IDplanningOfRoom"), datedebut, datefin, roomManager);
+				objs.add(obj);
+			}
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return objs;
+	}
 	
 }
