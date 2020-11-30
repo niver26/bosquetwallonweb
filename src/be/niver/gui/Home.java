@@ -19,6 +19,7 @@ import java.util.Calendar;
 
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -114,7 +115,10 @@ public class Home extends JFrame {
 	private JTable table;
 	private JTable table_2;
 	private JTable table_1;
+	private ArrayList<Place> placereserve = new ArrayList();
+	private JList listPagnier;
 	
+	private DefaultListModel listModel = new DefaultListModel();
 	/**
 	 * Launch the application.
 	 */
@@ -167,13 +171,14 @@ public class Home extends JFrame {
 		FicheSignalitique();
 		Reservation();
 		PlanningRoom();
-		Paiement();
 		lesReservationOrganizer();
 		PagnierSpectateur();
 		LesCommandeSpectateur();
 		reservationPlace();
+		Paiement();
 		hideAllPanel();
 		panelAcceuil.setVisible(true);
+		
 		
 		menu();
 		
@@ -240,6 +245,40 @@ public class Home extends JFrame {
 		btnAjoutPagnier.setBackground(SystemColor.textHighlight);
 		btnAjoutPagnier.setBounds(231, 369, 130, 39);
 		panelReservationPlace.add(btnAjoutPagnier);
+		
+		btnAjoutPagnier.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				try {
+					
+					if(comboBoxPlace.getSelectedIndex()>-1) {
+						
+					  
+					    placereserve.add((Place)comboBoxPlace.getSelectedItem());
+						
+					    JOptionPane.showMessageDialog(null, "L'article a été ajouter à voutre pagnier", "bosquet Wallon ", JOptionPane.ERROR_MESSAGE);
+					}else {
+						
+						
+						JOptionPane.showMessageDialog(null, "veuillez selectionner une place", "bosquet Wallon ", JOptionPane.ERROR_MESSAGE);
+					}
+					
+					
+				}
+				catch(Exception ex) {
+					JOptionPane.showMessageDialog(null, "Erreur rencontrée. Veuillez contacter l'administrateur", "bosquet Wallon ", JOptionPane.ERROR_MESSAGE);
+					ex.printStackTrace();
+				}
+			}
+		});
+	 
+	 
+		
+		
+		
+		
+		
 		
 		
 	}
@@ -393,7 +432,7 @@ public class Home extends JFrame {
 		lblNewLabel_1_1_2_1_1.setForeground(Color.RED);
 		lblNewLabel_1_1_2_1_1.setFont(new Font("Vivaldi", Font.BOLD, 20));
 		lblNewLabel_1_1_2_1_1.setBackground(Color.WHITE);
-		lblNewLabel_1_1_2_1_1.setBounds(718, 56, 148, 25);
+		lblNewLabel_1_1_2_1_1.setBounds(427, 249, 148, 25);
 		panelPagnierSpectator.add(lblNewLabel_1_1_2_1_1);
 		
 		textFieldMontantaPayerSpectator = new JTextField();
@@ -401,13 +440,8 @@ public class Home extends JFrame {
 		textFieldMontantaPayerSpectator.setFont(new Font("Vivaldi", Font.BOLD, 20));
 		textFieldMontantaPayerSpectator.setEditable(false);
 		textFieldMontantaPayerSpectator.setColumns(10);
-		textFieldMontantaPayerSpectator.setBounds(718, 113, 148, 36);
+		textFieldMontantaPayerSpectator.setBounds(427, 294, 148, 36);
 		panelPagnierSpectator.add(textFieldMontantaPayerSpectator);
-		
-		JTextPane textPanePanier = new JTextPane();
-		textPanePanier.setBackground(SystemColor.menu);
-		textPanePanier.setBounds(28, 56, 598, 339);
-		panelPagnierSpectator.add(textPanePanier);
 		
 		JLabel lblVotrePagnier = new JLabel("Votre pagnier");
 		lblVotrePagnier.setHorizontalAlignment(SwingConstants.CENTER);
@@ -416,16 +450,113 @@ public class Home extends JFrame {
 		lblVotrePagnier.setBounds(83, 10, 869, 36);
 		panelPagnierSpectator.add(lblVotrePagnier);
 		
-		//action btnPayerspectator
 		
-		/*btnPayerspectator.addMouseListener(new MouseAdapter() {
+		
+		listPagnier = new JList(listModel);
+		listPagnier.setBackground(SystemColor.inactiveCaptionBorder);
+		listPagnier.setBounds(10, 55, 373, 298);
+		panelPagnierSpectator.add(listPagnier);
+		
+		JLabel lblNewLabel_1_1_2_1_2 = new JLabel("Mode de paiement");
+		lblNewLabel_1_1_2_1_2.setForeground(Color.RED);
+		lblNewLabel_1_1_2_1_2.setFont(new Font("Vivaldi", Font.BOLD, 20));
+		lblNewLabel_1_1_2_1_2.setBackground(Color.WHITE);
+		lblNewLabel_1_1_2_1_2.setBounds(424, 71, 426, 25);
+		panelPagnierSpectator.add(lblNewLabel_1_1_2_1_2);
+		
+		JRadioButton rdbtnVisa = new JRadioButton("Visa");
+		rdbtnVisa.setFont(new Font("Vivaldi", Font.BOLD, 20));
+		rdbtnVisa.setBackground(Color.WHITE);
+		rdbtnVisa.setBounds(424, 113, 426, 21);
+		panelPagnierSpectator.add(rdbtnVisa);
+		
+		JRadioButton rdbtnPaypal = new JRadioButton("PayPal");
+		rdbtnPaypal.setFont(new Font("Vivaldi", Font.BOLD, 20));
+		rdbtnPaypal.setBackground(Color.WHITE);
+		rdbtnPaypal.setBounds(424, 142, 426, 21);
+		panelPagnierSpectator.add(rdbtnPaypal);
+		
+		JRadioButton rdbtnVirementSepa = new JRadioButton("Virement SEPA \u00E0 effectuer dans les 7 jours calendrier");
+		rdbtnVirementSepa.setFont(new Font("Vivaldi", Font.BOLD, 20));
+		rdbtnVirementSepa.setBackground(Color.WHITE);
+		rdbtnVirementSepa.setBounds(424, 174, 470, 21);
+		panelPagnierSpectator.add(rdbtnVirementSepa);
+		
+		ButtonGroup group1 = new ButtonGroup();
+		group1.add(rdbtnVisa);
+		group1.add(rdbtnPaypal);
+		group1.add(rdbtnVirementSepa);
 			
+		btnPayerspectator.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				panelPaiement.setVisible(true);
+				
+				try {
+					
+					if( rdbtnSurPlace.isSelected() || rdbtnSeFaireLivrerTimbre.isSelected() || rdbtnSeFaireLivrerEnvoi10edeplus.isSelected()){
+						
+						if(rdbtnVisa.isSelected() || rdbtnPaypal.isSelected() || rdbtnVirementSepa.isSelected() ) {
+							var prix = 0.0;
+							
+							var modepaiement = "";
+							var modedelivraison ="";
+							if(rdbtnVisa.isSelected()) modepaiement = "Visa";
+							if(rdbtnPaypal.isSelected()) modepaiement = "PayPal";
+							if(rdbtnVirementSepa.isSelected()) modepaiement = "Sepa";
+
+							if(rdbtnSurPlace.isSelected()) modedelivraison = "sur place";
+							if(rdbtnSeFaireLivrerTimbre.isSelected()) modedelivraison = "par Timbre";
+							if(rdbtnSeFaireLivrerEnvoi10edeplus.isSelected()) {
+								modedelivraison = "Se Faire Livrer";
+								prix = 10;	
+							}
+							for(var p : placereserve) {
+								prix +=p.getPrice();
+							}
+							
+							textFieldMontantaPayerSpectator.setText(String.valueOf(prix));
+						    
+							Order  order = new Order();
+						    order = new Order( 0,(Spectator)Person.CurrentUser, String.valueOf(modepaiement) , String.valueOf(modedelivraison), Double.valueOf(textFieldMontantaPayerSpectator.getText()));
+							var result = order.create(be.niver.connect.ConnectDataBase.getInstance());
+							
+							if(result) {
+							JOptionPane.showMessageDialog(null, "Merci de patienter vous serrez ridiriger chez votre operateur de paiement ", "bosquet Wallon ", JOptionPane.INFORMATION_MESSAGE);
+							listModel.clear();
+							listPagnier.clearSelection();
+							hideAllPanel();
+							panelPaiement.setVisible(true);
+							
+							
+						}else {
+							JOptionPane.showMessageDialog(null, "Erreur d'enregistrement. Veuillez contacter l'administrateur", "bosquet Wallon ", JOptionPane.ERROR_MESSAGE);
+						}
+						
+					}else {
+						
+						
+						JOptionPane.showMessageDialog(null, "veuillez remplir tous les champs", "bosquet Wallon ", JOptionPane.ERROR_MESSAGE);
+					}
+					
+							
+							
+				}else {
+					JOptionPane.showMessageDialog(null, "veuillez remplir tous les champs", "bosquet Wallon ", JOptionPane.ERROR_MESSAGE);
+				}
+						 
+						
+						
+					
+				}
+				catch(Exception ex) {
+					JOptionPane.showMessageDialog(null, "Erreur rencontrée. Veuillez contacter l'administrateur", "bosquet Wallon ", JOptionPane.ERROR_MESSAGE);
+					ex.printStackTrace();
+				}
 			}
-			
-		});*/
+		});
+		
+		
+		
 		
 	}
 	
@@ -745,34 +876,14 @@ public class Home extends JFrame {
 		lblNewLabel_1_1_2_1_1.setBounds(294, 176, 413, 25);
 		panelPaiement.add(lblNewLabel_1_1_2_1_1);
 		
-		JRadioButton rdbtnVirementSepa = new JRadioButton("Virement SEPA \u00E0 effectuer dans les 7 jours calendrier");
-		rdbtnVirementSepa.setFont(new Font("Vivaldi", Font.BOLD, 20));
-		rdbtnVirementSepa.setBackground(Color.WHITE);
-		rdbtnVirementSepa.setBounds(294, 113, 662, 21);
-		panelPaiement.add(rdbtnVirementSepa);
-		
-		JRadioButton rdbtnPaypal = new JRadioButton("PayPal");
-		rdbtnPaypal.setFont(new Font("Vivaldi", Font.BOLD, 20));
-		rdbtnPaypal.setBackground(Color.WHITE);
-		rdbtnPaypal.setBounds(294, 81, 643, 21);
-		panelPaiement.add(rdbtnPaypal);
-		
-		JRadioButton rdbtnVisa = new JRadioButton("Visa");
-		rdbtnVisa.setFont(new Font("Vivaldi", Font.BOLD, 20));
-		rdbtnVisa.setBackground(Color.WHITE);
-		rdbtnVisa.setBounds(294, 52, 643, 21);
-		panelPaiement.add(rdbtnVisa);
-		
 		ButtonGroup group = new ButtonGroup();
-		group.add(rdbtnVirementSepa);
-		group.add(rdbtnPaypal);
-		group.add(rdbtnVisa);
 		
-		JLabel lblNewLabel_1_1_2_1 = new JLabel("Mode de paiement");
+		JLabel lblNewLabel_1_1_2_1 = new JLabel("Payez en toute s\u00E9curit\u00E9");
+		lblNewLabel_1_1_2_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_1_1_2_1.setForeground(Color.RED);
-		lblNewLabel_1_1_2_1.setFont(new Font("Vivaldi", Font.BOLD, 20));
+		lblNewLabel_1_1_2_1.setFont(new Font("Vivaldi", Font.BOLD, 30));
 		lblNewLabel_1_1_2_1.setBackground(Color.WHITE);
-		lblNewLabel_1_1_2_1.setBounds(294, 10, 234, 25);
+		lblNewLabel_1_1_2_1.setBounds(294, 10, 413, 46);
 		panelPaiement.add(lblNewLabel_1_1_2_1);
 		
 		
@@ -1741,6 +1852,13 @@ public class Home extends JFrame {
 				public void mouseClicked(MouseEvent e) {
 					hideAllPanel();
 					panelPagnierSpectator.setVisible(true);
+					
+					
+					listModel.clear();
+					
+					for(var p : placereserve)
+						listModel.addElement(p);
+					
 				}
 				
 			});	
