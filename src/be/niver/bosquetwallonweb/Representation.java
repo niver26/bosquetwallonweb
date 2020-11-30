@@ -19,7 +19,9 @@ public class Representation implements Serializable{
 	private int IDRepresentation;
 	private Time BiginTime;
 	private Time EndTime;
-	private Place place_representation_fk;
+	private Date dateRepresentation;
+	
+	
 	private Set<Show> listShow = new HashSet<>();
 	
 	
@@ -35,11 +37,11 @@ public class Representation implements Serializable{
 	}
 	
 	public Representation(int iDRepresentation, Time biginTime, 
-			Time endTime, Place place_representation_fk) {
+			Time endTime, Date DateRepresentation ) {
 		IDRepresentation = iDRepresentation;
 		BiginTime = biginTime;
 		EndTime = endTime;
-		this.place_representation_fk = place_representation_fk;
+	    dateRepresentation = DateRepresentation;
 		
 	}
 	
@@ -62,10 +64,13 @@ public class Representation implements Serializable{
 		return EndTime;
 	}
 
-
-	public Place getPlace_representation_fk() {
-		return place_representation_fk;
+	public Date getDateRepresentation() {
+		return dateRepresentation;
 	}
+	public void setDateRepresentation(Date dateRepresentation) {
+		this.dateRepresentation = dateRepresentation;
+	}
+
 
 
 	public Set<Show> getListShow() {
@@ -88,9 +93,7 @@ public class Representation implements Serializable{
 	}
 
 
-	public void setPlace_representation_fk(Place place_representation_fk) {
-		this.place_representation_fk = place_representation_fk;
-	}
+	
 
 
 	public void setListShow(Set<Show> listShow) {
@@ -99,8 +102,8 @@ public class Representation implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Representation : IDRepresentation=" + IDRepresentation + ", BiginTime=" + BiginTime + ", EndTime="
-				+ EndTime + ", place_representation_fk=" + place_representation_fk + ", listShow=" + listShow ;
+		return  "Date: " +dateRepresentation +" Date de début : " + BiginTime + ", Date de fin="
+				+ EndTime ;
 	}
 
 	/**************************************************************************************/

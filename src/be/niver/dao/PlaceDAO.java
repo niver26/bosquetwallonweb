@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import be.niver.bosquetwallonweb.Order;
 import be.niver.bosquetwallonweb.Place;
+import be.niver.bosquetwallonweb.Representation;
 
 
 public class PlaceDAO extends DAO<Place>{
@@ -26,7 +27,7 @@ public class PlaceDAO extends DAO<Place>{
 					obj.getPrice(),
 					obj.getConfiguration(),
 					obj.isDispobible(),
-					obj.getOrder_place_fk().getIDOrder()
+					obj.getRepresentation_place_fk()
 					));  
 		
 		} catch (SQLException e) {
@@ -57,12 +58,12 @@ public class PlaceDAO extends DAO<Place>{
 		boolean result = false;
 		try {
 			result = updateStatement(String.format("UPDATE  Place "
-					+ "SET price = %s, configuration = '%s',isDispobible='%s', order_place_fk= %s "
+					+ "SET price = %s, configuration = '%s',isDispobible='%s', representation_place_fk= %s "
 					+ " WHERE IDPlace = %s", 
 					obj.getPrice(),
 					obj.getConfiguration(),
 					obj.isDispobible(),
-					obj.getOrder_place_fk().getIDOrder(),
+					obj.getRepresentation_place_fk(),
 					obj.getIDPlace()
 					));  
 			//System.out.println("update Place is "+ result);
@@ -82,14 +83,14 @@ public class PlaceDAO extends DAO<Place>{
 		try {
 			ResultSet result = this.connect
 					.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY)
-					.executeQuery("SELECT * FROM Place INNER JOIN Order as O on order_place_fk = O.IDOrder "
+					.executeQuery("SELECT * FROM Place INNER JOIN Representation as R on representation_place_fk = R.IDRepresentation "
 							+ " WHERE IDPlace = " + id);
 		
 			if (result.first())
 			{
 				
-				Order  order = new Order(result.getInt("IDOrder"));
-				obj = new Place(id,result.getInt("price"),  result.getString("configuration"), result.getBoolean("isDispobible"),order);
+				Representation  representation = new Representation(result.getInt("IDRepresentation"));
+				obj = new Place(id,result.getInt("price"),  result.getString("configuration"), result.getBoolean("isDispobible"),representation);
 				
 			}
 		
@@ -104,13 +105,13 @@ public class PlaceDAO extends DAO<Place>{
 	public ArrayList<Place> findAll() {
 		ArrayList<Place> objs = new ArrayList<Place>();
 		try {
-			PreparedStatement ps = connect.prepareStatement(String.format("SELECT * FROM Place INNER JOIN Order as O on order_place_fk = O.IDOrder "), 
+			PreparedStatement ps = connect.prepareStatement(String.format("SELECT * FROM Place INNER JOIN Representation as R on representation_place_fk = R.IDRepresentation"), 
 					ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);  
             ResultSet result = ps.executeQuery();  
             
 			while (result.next()) {
-				Order  order = new Order(result.getInt("IDOrder"));
-				Place obj = new Place(result.getInt("IDPlace"),result.getInt("price"),  result.getString("configuration"), result.getBoolean("isDispobible"),order);
+				Representation  representation = new Representation(result.getInt("IDRepresentation"));
+				Place obj = new Place(result.getInt("IDPlace"),result.getInt("price"),  result.getString("configuration"), result.getBoolean("isDispobible"),representation);
 				
 				objs.add(obj);
 			}

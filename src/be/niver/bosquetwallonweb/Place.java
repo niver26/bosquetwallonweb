@@ -16,8 +16,8 @@ public class Place implements Serializable{
 	private double price;
 	private String configuration;
 	private boolean isDispobible;
-	private Order order_place_fk;
-	private Set<Representation> listRepresentation = new HashSet<>();
+	private Representation representation_place_fk;
+	
 	
 	public Place() {
 		
@@ -26,25 +26,16 @@ public class Place implements Serializable{
 	public Place(int iDPlace) {
 		IDPlace = iDPlace;
 	}
-	public Place(int iDPlace, double price, String configuration, boolean isDispobible, Order order_place_fk) {
+	public Place(int iDPlace, double price, String configuration, boolean isDispobible, Representation representation_place_fk) {
 		
 		IDPlace = iDPlace;
 		this.price = price;
 		this.configuration = configuration;
 		this.isDispobible = isDispobible;
-		this.order_place_fk = order_place_fk;
+		this.representation_place_fk = representation_place_fk;
 		
 	}
 
-	
-	
-	public Set<Representation> getListRepresentation() {
-		return listRepresentation;
-	}
-
-	public void setListRepresentation(Set<Representation> listRepresentation) {
-		this.listRepresentation = listRepresentation;
-	}
 
 	public int getIDPlace() {
 		return IDPlace;
@@ -62,8 +53,8 @@ public class Place implements Serializable{
 		return isDispobible;
 	}
 
-	public Order getOrder_place_fk() {
-		return order_place_fk;
+	public Representation getRepresentation_place_fk() {
+		return representation_place_fk;
 	}
 
 	public void setIDPlace(int iDPlace) {
@@ -82,15 +73,14 @@ public class Place implements Serializable{
 		this.isDispobible = isDispobible;
 	}
 
-	public void setOrder_place_fk(Order order_place_fk) {
-		this.order_place_fk = order_place_fk;
+	public void setRepresentation_place_fk(Representation representation_place_fk) {
+		this.representation_place_fk = representation_place_fk;
 	}
 	
 	@Override
 	public String toString() {
-		return "Place [IDPlace=" + IDPlace + ", price=" + price + ", configuration=" + configuration + ", isDispobible="
-				+ isDispobible + ", order_place_fk=" + order_place_fk + ", listRepresentation=" + listRepresentation
-				+ "]";
+		return " price: " + price +  ", Disponibilité : "
+				+ isDispobible + " representation_place_fk: " + representation_place_fk ;
 	}
 	
 	

@@ -12,6 +12,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.sql.Date;
+import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -34,6 +35,7 @@ import be.niver.bosquetwallonweb.Booking;
 import be.niver.bosquetwallonweb.Order;
 import be.niver.bosquetwallonweb.Organizer;
 import be.niver.bosquetwallonweb.Person;
+import be.niver.bosquetwallonweb.Place;
 import be.niver.bosquetwallonweb.PlanningOfRoom;
 import be.niver.bosquetwallonweb.Representation;
 import be.niver.bosquetwallonweb.RoomManager;
@@ -75,12 +77,13 @@ public class Home extends JFrame {
 	private JPanel panelReservation;
 	private JPanel panelPllanningRoom;
 	private JPanel panelPaiement;
-	private JPanel panelListePlanning;
+	
 	private JPanel panelListeOrganizer;
 	private JPanel panelFicheSignaletiqueSpectacle;
 	private JPanel panelPagnierSpectator;
 	private JPanel panelLESCommandesSpectator;
 	private  JPanel panelManagerListe;
+	private JPanel panelReservationPlace;
 	private JTextField textFieldgarrantie;
 	private JTextField textFieldAccompte;
 	private JTextField textFieldLoyer;
@@ -101,7 +104,6 @@ public class Home extends JFrame {
 	private JTextField textFieldprixbronzeCirque;
 	private JTextField textFieldDescription;
 	private JTextField textFieldTitreFS;
-	private JTextField textField_5;
 	private JTextField textFieldheureouvertureporteFS;
 	private JTextField textFieldHeuredebutFS;
 	private JTextField textFieldHeurefinFS;
@@ -159,24 +161,19 @@ public class Home extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		
-		
-		
 		accueil();
 		update();
 		ManagerListe();
 		FicheSignalitique();
 		Reservation();
 		PlanningRoom();
-		ListedesPlanning();
 		Paiement();
 		lesReservationOrganizer();
 		PagnierSpectateur();
 		LesCommandeSpectateur();
-		UpdatePlanningRoom() ;
+		reservationPlace();
 		hideAllPanel();
 		panelAcceuil.setVisible(true);
-		
 		
 		menu();
 		
@@ -214,6 +211,39 @@ public class Home extends JFrame {
 		panelAcceuil.add(lblNewLabel_1);
 		
 	}
+	
+	private void reservationPlace() {
+		 panelReservationPlace = new JPanel();
+		panelReservationPlace.setBackground(Color.WHITE);
+		panelReservationPlace.setBounds(10, 10, 952, 781);
+		contentPane.add(panelReservationPlace);
+		panelReservationPlace.setLayout(null);
+		
+		JComboBox comboBoxPlace = new JComboBox();
+		comboBoxPlace.setBackground(Color.WHITE);
+		comboBoxPlace.setBounds(43, 200, 808, 54);
+		panelReservationPlace.add(comboBoxPlace);
+		
+		var place  = new Place().findAll(be.niver.connect.ConnectDataBase.getInstance());
+		for(var p : place)
+			comboBoxPlace.addItem(p);
+		
+		
+		JLabel lblNewLabel_3 = new JLabel("Selectionner une place \u00E0 ajouter au pagnier");
+		lblNewLabel_3.setForeground(Color.BLUE);
+		lblNewLabel_3.setFont(new Font("Vivaldi", Font.BOLD, 30));
+		lblNewLabel_3.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_3.setBounds(10, 31, 932, 54);
+		panelReservationPlace.add(lblNewLabel_3);
+		
+		JButton btnAjoutPagnier = new JButton("Ajouter au Pagner");
+		btnAjoutPagnier.setBackground(SystemColor.textHighlight);
+		btnAjoutPagnier.setBounds(231, 369, 130, 39);
+		panelReservationPlace.add(btnAjoutPagnier);
+		
+		
+	}
+	
 	
 	private void ManagerListe() {
 		
@@ -416,14 +446,8 @@ public class Home extends JFrame {
 		textFieldTitreFS = new JTextField();
 		textFieldTitreFS.setFont(new Font("Vivaldi", Font.BOLD, 20));
 		textFieldTitreFS.setColumns(10);
-		textFieldTitreFS.setBounds(262, 251, 406, 28);
+		textFieldTitreFS.setBounds(262, 287, 406, 28);
 		panelFicheSignaletiqueSpectacle.add(textFieldTitreFS);
-		
-		textField_5 = new JTextField();
-		textField_5.setFont(new Font("Vivaldi", Font.BOLD, 20));
-		textField_5.setColumns(10);
-		textField_5.setBounds(262, 332, 406, 28);
-		panelFicheSignaletiqueSpectacle.add(textField_5);
 		
 		textFieldheureouvertureporteFS = new JTextField();
 		textFieldheureouvertureporteFS.setFont(new Font("Vivaldi", Font.BOLD, 20));
@@ -444,6 +468,7 @@ public class Home extends JFrame {
 		panelFicheSignaletiqueSpectacle.add(textFieldHeurefinFS);
 		
 		JButton btnValiderFS = new JButton("Valider");
+		
 		btnValiderFS.setForeground(Color.BLACK);
 		btnValiderFS.setBackground(SystemColor.textHighlight);
 		btnValiderFS.setBounds(315, 500, 98, 46);
@@ -451,18 +476,13 @@ public class Home extends JFrame {
 		
 		JLabel lblTitrefichsigspec = new JLabel("Titre");
 		lblTitrefichsigspec.setFont(new Font("Vivaldi", Font.BOLD | Font.ITALIC, 20));
-		lblTitrefichsigspec.setBounds(120, 251, 132, 28);
+		lblTitrefichsigspec.setBounds(120, 287, 132, 28);
 		panelFicheSignaletiqueSpectacle.add(lblTitrefichsigspec);
 		
 		JLabel lblArtiste = new JLabel("Artiste");
 		lblArtiste.setFont(new Font("Vivaldi", Font.BOLD | Font.ITALIC, 20));
-		lblArtiste.setBounds(120, 287, 132, 28);
+		lblArtiste.setBounds(120, 325, 132, 28);
 		panelFicheSignaletiqueSpectacle.add(lblArtiste);
-		
-		JLabel Date = new JLabel("Date");
-		Date.setFont(new Font("Vivaldi", Font.BOLD | Font.ITALIC, 20));
-		Date.setBounds(120, 325, 132, 28);
-		panelFicheSignaletiqueSpectacle.add(Date);
 		
 		JLabel lblOrPlannification_1_2 = new JLabel("ouverture des portes");
 		lblOrPlannification_1_2.setFont(new Font("Vivaldi", Font.BOLD | Font.ITALIC, 20));
@@ -489,48 +509,88 @@ public class Home extends JFrame {
 		comboBoxListSpectacle.setBounds(120, 135, 548, 28);
 		panelFicheSignaletiqueSpectacle.add(comboBoxListSpectacle);
 		
+		var show = new Show().findAll(be.niver.connect.ConnectDataBase.getInstance());
+		for(var p : show)
+			comboBoxListSpectacle.addItem(p);
+		
 		JComboBox comboBoxArtiste = new JComboBox();
-		comboBoxArtiste.setBounds(262, 289, 406, 33);
+		comboBoxArtiste.setBounds(262, 325, 406, 33);
 		panelFicheSignaletiqueSpectacle.add(comboBoxArtiste);
 		
+		var artiste1 = new Artist(1).find(be.niver.connect.ConnectDataBase.getInstance());
+		comboBoxArtiste.addItem(artiste1.getSpeciality());
 		
-	/*	for (int i = 1; i < 6; i++) {
-		 var artist =  new Artist().find(be.niver.connect.ConnectDataBase.getInstance());
-		 comboBoxArtiste.addItem(artist.getSpeciality());
-		}*/
+		var artiste2 = new Artist(3).find(be.niver.connect.ConnectDataBase.getInstance());
+		comboBoxArtiste.addItem(artiste2.getSpeciality());
+			
+		var artiste3 = new Artist(9).find(be.niver.connect.ConnectDataBase.getInstance());
+		comboBoxArtiste.addItem(artiste3.getSpeciality());
+			
+		var artiste4 = new Artist(10).find(be.niver.connect.ConnectDataBase.getInstance());
+		comboBoxArtiste.addItem(artiste4.getSpeciality());	
+			
+		var artiste5 = new Artist(11).find(be.niver.connect.ConnectDataBase.getInstance());
+		comboBoxArtiste.addItem(artiste5.getSpeciality());	
+			
+		JDateChooser dateChooserLadateFS = new JDateChooser();
+		dateChooserLadateFS.setBounds(262, 226, 406, 41);
+		panelFicheSignaletiqueSpectacle.add(dateChooserLadateFS);
 		
-		 var artist1 =  new Artist(1).find(be.niver.connect.ConnectDataBase.getInstance());
-		 comboBoxArtiste.addItem(artist1.getSpeciality());
-		
-		 var artist2 =  new Artist(3).find(be.niver.connect.ConnectDataBase.getInstance());
-		 comboBoxArtiste.addItem(artist2.getSpeciality());
-		 
-		 var artist3 =  new Artist(9).find(be.niver.connect.ConnectDataBase.getInstance());
-		 comboBoxArtiste.addItem(artist3.getSpeciality());
-		 var artist4 =  new Artist(10).find(be.niver.connect.ConnectDataBase.getInstance());
-		 comboBoxArtiste.addItem(artist4.getSpeciality());
-		
-		 var artist5 =  new Artist(11).find(be.niver.connect.ConnectDataBase.getInstance());
-		 comboBoxArtiste.addItem(artist5.getSpeciality());
-		 
-		Representation representation = new Representation();
-		representation = new Representation(representation.getIDRepresentation());
-		PlanningOfRoom planningOfRoom =  new PlanningOfRoom();
-		planningOfRoom =  new PlanningOfRoom(planningOfRoom.getIDplanningOfRoom());
-		Organizer orginizer = new Organizer();
-		orginizer = new Organizer(orginizer.getIDPerson_Organizer_fk());
-		 Show show = new Show();
-		 
-		 //if(orginizer.getIDPerson_Organizer_fk() == Person.CurrentUser.getIDperson()) {
-			 show = new Show(show.getIDShow(),show.getTitle(),representation,planningOfRoom,orginizer);
+		JLabel lblDate = new JLabel("Date");
+		lblDate.setFont(new Font("Vivaldi", Font.BOLD | Font.ITALIC, 20));
+		lblDate.setBounds(109, 226, 132, 41);
+		panelFicheSignaletiqueSpectacle.add(lblDate);
+			//btnValiderFS
+			
+			 btnValiderFS.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						
+						try {
+							
+							if(comboBoxArtiste.getSelectedIndex()>-1 && comboBoxListSpectacle.getSelectedIndex()>-1 
+									&&! dateChooserLadateFS.getDate().toString().isBlank()
+									&& ! textFieldheureouvertureporteFS.getText().isBlank()
+									&& ! textFieldHeuredebutFS.getText().isBlank()
+									&& ! textFieldHeurefinFS.getText().isBlank()
+									&& ! textFieldTitreFS.getText().isBlank() ){
+								
+								 SimpleDateFormat dcn = new SimpleDateFormat("yyyy-MM-dd");
+							    String dates8 = dcn.format(dateChooserLadateFS.getDate() );
+							    Date date8 = Date.valueOf(dates8);
+							  
+							    Representation  representation = new Representation();
+							    representation = new Representation(0, Time.valueOf(textFieldHeuredebutFS.getText()) , Time.valueOf(textFieldHeurefinFS.getText()), date8);
+								var result = representation.create(be.niver.connect.ConnectDataBase.getInstance());
+								
+								if(result) {
+									JOptionPane.showMessageDialog(null, "Fiche signalitique éffectuer avec succès ", "bosquet Wallon ", JOptionPane.INFORMATION_MESSAGE);
+									refreshPlanning() ;
+									
+									
+								}else {
+									JOptionPane.showMessageDialog(null, "Erreur d'enregistrement. Veuillez contacter l'administrateur", "bosquet Wallon ", JOptionPane.ERROR_MESSAGE);
+								}
+								
+							}else {
+								
+								
+								JOptionPane.showMessageDialog(null, "veuillez remplir tous les champs", "bosquet Wallon ", JOptionPane.ERROR_MESSAGE);
+							}
+							
+							
+						}
+						catch(Exception ex) {
+							JOptionPane.showMessageDialog(null, "Erreur rencontrée. Veuillez contacter l'administrateur", "bosquet Wallon ", JOptionPane.ERROR_MESSAGE);
+							ex.printStackTrace();
+						}
+					}
+				});
 			 
-			 var result =  show.findAll(be.niver.connect.ConnectDataBase.getInstance());
 			 
-			 for(var p : result ) {
-				 	comboBoxListSpectacle.addItem(p.getIDShow());
-				}
-			//} 
-		 
+			 
+			 
+			 
 	}
 	
 	private void lesReservationOrganizer() {
@@ -724,35 +784,6 @@ public class Home extends JFrame {
 		
 	}
 	
-	private void ListedesPlanning() {
-		
-		panelListePlanning = new JPanel();
-		panelListePlanning.setBackground(Color.WHITE);
-		panelListePlanning.setBounds(0, 0, 962, 801);
-		contentPane.add(panelListePlanning);
-		panelListePlanning.setLayout(null);
-		
-		JComboBox comboBoxListePlanning = new JComboBox();
-		comboBoxListePlanning.setBackground(Color.WHITE);
-		comboBoxListePlanning.setBounds(46, 67, 879, 54);
-		panelListePlanning.add(comboBoxListePlanning);
-		
-		RoomManager roomManager =  new RoomManager();
-		 roomManager =  new RoomManager(roomManager.getIDPerson_RoomManager_fk());
-		 PlanningOfRoom planningOfRoom = new PlanningOfRoom();
-		// if(planningOfRoom.getRoomManager_PlannigOfRoom().getIDPerson_RoomManager_fk() == Person.CurrentUser.getIDperson()) {
-			 planningOfRoom = new PlanningOfRoom(planningOfRoom.getIDplanningOfRoom(),planningOfRoom.getBiginDate(),
-					planningOfRoom.getEndDate(), roomManager);
-			 var result =  planningOfRoom.findAll(be.niver.connect.ConnectDataBase.getInstance());
-			
-			 for(var p : result ) {
-				comboBoxListePlanning.addItem(p);
-				}
-		
-		
-	}
-	
-	
 	private void PlanningRoom() {
 		panelPllanningRoom = new JPanel();
 		panelPllanningRoom.setBackground(Color.WHITE);
@@ -852,53 +883,6 @@ public class Home extends JFrame {
 		
 	}
 	
-	private void UpdatePlanningRoom() {
-		panelPllanningRoom = new JPanel();
-		panelPllanningRoom.setBackground(Color.WHITE);
-		panelPllanningRoom.setBounds(0, 0, 962, 801);
-		contentPane.add(panelPllanningRoom);
-		panelPllanningRoom.setLayout(null);
-		
-		JLabel Heuredebut = new JLabel("Heure d\u00E9but");
-		Heuredebut.setFont(new Font("Vivaldi", Font.BOLD | Font.ITALIC, 20));
-		Heuredebut.setBounds(437, 76, 129, 28);
-		panelPllanningRoom.add(Heuredebut);
-		
-		JLabel lblHeurefin = new JLabel("Heure fin");
-		lblHeurefin.setFont(new Font("Vivaldi", Font.BOLD | Font.ITALIC, 20));
-		lblHeurefin.setBounds(441, 125, 138, 28);
-		panelPllanningRoom.add(lblHeurefin);
-		
-		JButton btnValiderplanification = new JButton("Valider");
-		btnValiderplanification.setForeground(Color.BLACK);
-		btnValiderplanification.setBackground(SystemColor.textHighlight);
-		btnValiderplanification.setBounds(624, 596, 98, 46);
-		panelPllanningRoom.add(btnValiderplanification);
-		
-		JLabel lblPlanificationDesSalles = new JLabel("Planification des salles");
-		lblPlanificationDesSalles.setForeground(Color.BLUE);
-		lblPlanificationDesSalles.setFont(new Font("Vivaldi", Font.BOLD | Font.ITALIC, 33));
-		lblPlanificationDesSalles.setBounds(441, 10, 521, 33);
-		panelPllanningRoom.add(lblPlanificationDesSalles);
-		
-		JLabel lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setIcon(new ImageIcon(Home.class.getResource("/images/show.jpg")));
-		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1.setBounds(0, 0, 427, 733);
-		panelPllanningRoom.add(lblNewLabel_1);
-		
-		JDateChooser dateChooserDateDebut = new JDateChooser();
-		dateChooserDateDebut.setBounds(576, 76, 333, 28);
-		panelPllanningRoom.add(dateChooserDateDebut);
-		
-		JDateChooser dateChooserDateFin = new JDateChooser();
-		dateChooserDateFin.setBounds(576, 125, 333, 28);
-		panelPllanningRoom.add(dateChooserDateFin);
-		
-		
-		
-		
-	}
 	
 	private void refreshPlanning() {
 		planningResult =  new PlanningOfRoom().findAllNotBooking(be.niver.connect.ConnectDataBase.getInstance());
@@ -1435,33 +1419,7 @@ public class Home extends JFrame {
 			}
 			
 		});
-		
-		textFieldLoyer.addInputMethodListener(new InputMethodListener() {
-			public void caretPositionChanged(InputMethodEvent event) {
-			}
-			public void inputMethodTextChanged(InputMethodEvent event) {
-				 
-				double montant1 = 0,
-						montant2 = 0,
-						montant3 = 0;
-				if(!textFieldgarrantie.getText().isBlank()) {
-					montant1 = Double.valueOf(textFieldgarrantie.getText());
-				}
-				
-				if(!textFieldgarrantie.getText().isBlank()) {
-					montant2 = Double.valueOf(lblServicesVip.getText());
-				}
-				
-				if(!textFieldgarrantie.getText().isBlank()) {
-					montant3 = Double.valueOf(textFieldAccompte.getText());
-				}
-				
-				
-				var montant = montant1 +montant2 + montant3;
-				System.out.println(montant);
-				textFieldMontantBooking.setText(String.valueOf(montant)); 
-			}
-		});
+
 		
 	}
 	
@@ -1629,7 +1587,6 @@ public class Home extends JFrame {
 		panelUpdateUser.setVisible(false);
 		panelAcceuil.setVisible(false);
 		panelReservation.setVisible(false);
-		panelListePlanning.setVisible(false);
 		panelListeOrganizer.setVisible(false);
 		panelFicheSignaletiqueSpectacle.setVisible(false);
 		panelPagnierSpectator.setVisible(false);
@@ -1637,6 +1594,7 @@ public class Home extends JFrame {
 		panelManagerListe.setVisible(false);
 		panelPllanningRoom.setVisible(false);
 		panelPaiement.setVisible(false);
+		panelReservationPlace.setVisible(false);
 	}
 	
 	private void menu() 
@@ -1647,7 +1605,7 @@ public class Home extends JFrame {
 		setJMenuBar(menuBar);
 		
 		JMenu mnexitacceuil, mnuser, Retour, 
-		ListReservationOrganizer, updateuser, GestionreservationRoomManager, reserverSepectator, voirliste, plannifierupdate, 
+		ListReservationOrganizer, updateuser, reserverSepectator, voirliste, plannifierupdate, 
 		reserverSalle, MescommandeSpectator, MonPagnierSpectator, ficheSignalitiqueSpectacle;
 		
 		
@@ -1685,10 +1643,6 @@ public class Home extends JFrame {
 			updateuser.setForeground(Color.BLACK);
 			updateuser.setFont(new Font("HP Simplified", Font.BOLD | Font.ITALIC, 15));
 			
-			GestionreservationRoomManager = new JMenu("plannifier les salles");
-			GestionreservationRoomManager.setHorizontalAlignment(SwingConstants.RIGHT);
-			GestionreservationRoomManager.setForeground(Color.BLACK);
-			GestionreservationRoomManager.setFont(new Font("HP Simplified", Font.BOLD | Font.ITALIC, 15));
 			
 			reserverSepectator = new JMenu("Réserver un Spectacle");
 			reserverSepectator.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -1706,7 +1660,7 @@ public class Home extends JFrame {
 			MonPagnierSpectator.setFont(new Font("HP Simplified", Font.BOLD | Font.ITALIC, 15));
 			
 			
-			plannifierupdate = new JMenu("Modifier un planning");
+			plannifierupdate = new JMenu("Plannifier les salles");
 			plannifierupdate.setHorizontalAlignment(SwingConstants.RIGHT);
 			plannifierupdate.setForeground(Color.BLACK);
 			plannifierupdate.setFont(new Font("HP Simplified", Font.BOLD | Font.ITALIC, 15));
@@ -1733,7 +1687,6 @@ public class Home extends JFrame {
 				mnuser.add(ListReservationOrganizer);
 			}
 			else if(Person.CurrentUser.getrole()==2) {
-				mnuser.add(GestionreservationRoomManager);
 				mnuser.add(plannifierupdate);
 				mnuser.add(voirliste);
 				
@@ -1779,16 +1732,6 @@ public class Home extends JFrame {
 				
 			});
 						
-			// action GestionreservationRoomManager
-				GestionreservationRoomManager.addMouseListener(new MouseAdapter() {
-				
-				@Override
-				public void mouseClicked(MouseEvent e) {
-					hideAllPanel();
-					panelListePlanning.setVisible(true);
-				}
-				
-			});
 				
 			//action MonPagnierSpectator
 				
@@ -1860,6 +1803,19 @@ public class Home extends JFrame {
 				}
 				
 			});
+			
+			//reserverSepectator
+			
+			reserverSepectator.addMouseListener(new MouseAdapter() {
+				
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					hideAllPanel();
+					panelReservationPlace.setVisible(true);
+				}
+				
+			});
+			
 			
 			// action button Retour
 			Retour.addMouseListener(new MouseAdapter() {

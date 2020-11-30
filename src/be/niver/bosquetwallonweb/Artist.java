@@ -68,23 +68,17 @@ import be.niver.dao.PersonDAO;
 		ShowArtiste =showArtiste;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return "Artist [IDPerson_Artiste_fk=" + IDPerson_Artiste_fk + ", ShowArtiste=" + ShowArtiste + ", Speciality="
+				+ Speciality + "]";
+	}
 	/**************************************************************************************/
 	/**
 	 * les fonctions de la classe
 	 * @return
 	 */
 	
-	@Override
-	public String toString() {
-		return "Nom: [IDPerson_Artiste_fk=" + IDPerson_Artiste_fk + ", ShowArtiste=" + ShowArtiste
-				+ ", Speciality=" + Speciality + "]";
-	}
-	
-	public String Affiche() {
-		return "   Spectialisté : "+ this.getSpeciality()+ "   Nom : " +this.getFirstName();
-				
-	}
 	
 	@Override
 	public boolean create(Connection conn) {

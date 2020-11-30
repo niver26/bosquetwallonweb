@@ -94,7 +94,7 @@ public class Show implements Serializable{
 	
 	@Override
 	public String toString() {
-		return "Numero Spectacle" + IDShow + ", title=" + title + ", representation_show_fk=" + representation_show_fk
+		return "Numero Spectacle" + IDShow + " title=" + title + ", representation_show_fk=" + representation_show_fk
 				+ ", planning_show_fk=" + planning_show_fk + ", Organizer_show_fk=" + Organizer_show_fk ;
 	}
 

@@ -19,38 +19,12 @@ public class BookingDAO extends DAO<Booking> {
 		super(conn);
 		
 	}
-//( 0 ,%s, %s, %s, %s,'%s', '%s', %s, %s, %s )
-	/*
-	 				* obj.getDeposit(),
-					obj.getInsurance(),
-					obj.getRoomBookingPrice(),
-					obj.getOrganizer_Booking_fk().getIDPerson_Organizer_fk(),
-					obj.getBookingDate(),
-					obj.getOptionnalService(),
-					obj.getOptionnalServicePrice(),
-					obj.getTotalPrice(),
-				
-	 */
+
 	@Override
 	public boolean create(Booking obj) { 
 		boolean result = false;
 		try {
 		System.out.println(obj);
-		/*
-			result = updateStatement(String.format("INSERT INTO Booking VALUES ( 0 ,%s, %s, %s, %s,'%s', '%s', %s, %s, %s )" ,
-					obj.getDeposit(),
-					obj.getInsurance(),
-					obj.getRoomBookingPrice(),
-					obj.getOrganizer_Booking_fk().getIDPerson_Organizer_fk(),
-					obj.getBookingDate(),
-					obj.getOptionnalService(),
-					obj.getOptionnalServicePrice(),
-					obj.getTotalPrice(),
-					obj.getPlanninOfRoom().getIDplanningOfRoom()
-					
-					
-					));  
-			*/
 			
 		 PreparedStatement ps = connect.prepareStatement("INSERT INTO Booking(deposit, "
 					+ "insurance,"
@@ -67,7 +41,7 @@ public class BookingDAO extends DAO<Booking> {
 		 ps.setDouble(8,obj.getTotalPrice());
 		 ps.setObject(9, obj.getPlanninOfRoom().getIDplanningOfRoom());
 		  int result1 = ps.executeUpdate();
-		  System.out.println("update result is "+ result1);  
+		 // System.out.println("update result is "+ result1);  
 		  result = result1 >0;
 			
 			
