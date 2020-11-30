@@ -26,6 +26,9 @@ import be.niver.dao.PersonDAO;
 		
 	}
 	
+	public Artist(int iDPerson) {
+		IDPerson_Artiste_fk = iDPerson;
+	}
 	public Artist(int iDPerson, String firstName, String lastName, String adress, String email, String passWord,int Role, Show showArtiste,
 			String speciality) {
 		super(iDPerson, firstName, lastName, adress, email, passWord, Role);
@@ -65,18 +68,17 @@ import be.niver.dao.PersonDAO;
 		ShowArtiste =showArtiste;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return "Artist [IDPerson_Artiste_fk=" + IDPerson_Artiste_fk + ", ShowArtiste=" + ShowArtiste + ", Speciality="
+				+ Speciality + "]";
+	}
 	/**************************************************************************************/
 	/**
 	 * les fonctions de la classe
 	 * @return
 	 */
 	
-	@Override
-	public String toString() {
-		return "Artist [IDPerson_Artiste_fk=" + IDPerson_Artiste_fk + ", ShowArtiste=" + ShowArtiste
-				+ ", Speciality=" + Speciality + "]";
-	}
 	
 	@Override
 	public boolean create(Connection conn) {
@@ -112,5 +114,7 @@ import be.niver.dao.PersonDAO;
 		return dao.login(this.getE_Mail(), this.getPassWord());		
 		
 	}
+	
+	
 	
 }

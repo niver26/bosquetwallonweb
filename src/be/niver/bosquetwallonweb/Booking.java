@@ -1,9 +1,14 @@
 package be.niver.bosquetwallonweb;
 
 import java.io.Serializable;
+import java.sql.Connection;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
+
+import be.niver.dao.ArtistDAO;
+import be.niver.dao.BookingDAO;
 
 public class Booking implements Serializable {
 	private static final long serialVersionUID = 7787170877756499146L;
@@ -16,7 +21,8 @@ public class Booking implements Serializable {
 	private String optionnalService;
 	private double optionnalServicePrice;
 	private double totalPrice;
-	private Set<PlanningOfRoom> listPlanningOfRoom = new HashSet<>();
+	private PlanningOfRoom planningOfRoom;
+	//private Set<PlanningOfRoom> listPlanningOfRoom = new HashSet<>();
 
 	public Booking() {
 		
@@ -28,7 +34,7 @@ public class Booking implements Serializable {
 	
 	public Booking(int iDBooking, double deposit, double insurance, double roomBookingPrice,
 			Organizer organizer_Booking_fk, Date bookingDate, String optionnalService, double optionnalServicePrice,
-			double totalPrice) {
+			double totalPrice, PlanningOfRoom planninOfRoom) {
 		
 		IDBooking = iDBooking;
 		this.deposit = deposit;
@@ -39,16 +45,9 @@ public class Booking implements Serializable {
 		this.optionnalService = optionnalService;
 		this.optionnalServicePrice = optionnalServicePrice;
 		this.totalPrice = totalPrice;
+		this.planningOfRoom =  planninOfRoom;
 	}
 
-	public Set<PlanningOfRoom> getListPlanningOfRoom() {
-		return listPlanningOfRoom;
-	}
-
-	public void setListPlanningOfRoom(Set<PlanningOfRoom> listPlanningOfRoom) {
-		this.listPlanningOfRoom = listPlanningOfRoom;
-	}
-	
 	public int getIDBooking() {
 		return IDBooking;
 	}
@@ -68,6 +67,14 @@ public class Booking implements Serializable {
 		return roomBookingPrice;
 	}
 
+
+	public PlanningOfRoom getPlanninOfRoom() {
+		return planningOfRoom;
+	}
+
+	public void setPlanninOfRoom(PlanningOfRoom planninOfRoom) {
+		this.planningOfRoom = planninOfRoom;
+	}
 
 	public Organizer getOrganizer_Booking_fk() {
 		return organizer_Booking_fk;
@@ -143,9 +150,51 @@ public class Booking implements Serializable {
 		return "Booking [IDBooking=" + IDBooking + ", deposit=" + deposit + ", insurance=" + insurance
 				+ ", roomBookingPrice=" + roomBookingPrice + ", organizer_Booking_fk=" + organizer_Booking_fk
 				+ ", bookingDate=" + bookingDate + ", optionnalService=" + optionnalService + ", optionnalServicePrice="
-				+ optionnalServicePrice + ", totalPrice=" + totalPrice + ", listPlanningOfRoom=" + listPlanningOfRoom
+				+ optionnalServicePrice + ", totalPrice=" + totalPrice  + " planning : " +planningOfRoom
 				+ "]";
 	}
+	
+	/**************************************************************************************/
+	/**
+	 * les fonctions de la classe
+	 * @return
+	 */
+	
+	public boolean create(Connection conn) {
+		BookingDAO dao = new BookingDAO(conn);
+		return dao.create(this);		
+		
+	}
+
+	public boolean delete(Connection conn) {
+		BookingDAO dao = new BookingDAO(conn);
+		return dao.delete(this);		
+		
+	}
+
+	public boolean update(Connection conn) {
+		BookingDAO dao = new BookingDAO(conn);
+		return dao.update(this);		
+		
+	}
+
+	public Booking find(Connection conn) {
+		BookingDAO dao = new BookingDAO(conn);
+		return dao.find(this.getIDBooking());		
+		
+	}
+	
+	public ArrayList<Booking> findAll(Connection conn) {
+		BookingDAO dao = new BookingDAO(conn);
+		ArrayList<Booking> l = new ArrayList<Booking>();
+		for(var p : dao.findAll()) {
+			l.add((Booking)p);
+		}
+		return l;		
+		
+	}
+	
+	
 	
 
 }

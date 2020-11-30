@@ -1,8 +1,12 @@
 package be.niver.bosquetwallonweb;
 
 import java.io.Serializable;
+import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
+
+import be.niver.dao.ShowDAO;
 
 public class Show implements Serializable{
 	private static final long serialVersionUID = 7787170877756499146L;
@@ -32,7 +36,6 @@ public class Show implements Serializable{
 	
 	public Show(int iDShow, String title, Representation representation_show_fk, PlanningOfRoom planning_show_fk,
 			Organizer organizer_show_fk) {
-		super();
 		IDShow = iDShow;
 		this.title = title;
 		this.representation_show_fk = representation_show_fk;
@@ -91,9 +94,49 @@ public class Show implements Serializable{
 	
 	@Override
 	public String toString() {
-		return "Show [IDShow=" + IDShow + ", title=" + title + ", representation_show_fk=" + representation_show_fk
-				+ ", planning_show_fk=" + planning_show_fk + ", Organizer_show_fk=" + Organizer_show_fk
-				+ ", listConfiguration=" + listConfiguration + ", listRepresentation=" + listRepresentation + "]";
+		return "Numero Spectacle" + IDShow + " title=" + title + ", representation_show_fk=" + representation_show_fk
+				+ ", planning_show_fk=" + planning_show_fk + ", Organizer_show_fk=" + Organizer_show_fk ;
 	}
 
+	
+	/**************************************************************************************/
+	/**
+	 * les fonctions de la classe
+	 * @return
+	 */
+	
+	public boolean create(Connection conn) {
+		ShowDAO dao = new ShowDAO(conn);
+		return dao.create(this);		
+		
+	}
+
+	public boolean delete(Connection conn) {
+		ShowDAO dao = new ShowDAO(conn);
+		return dao.delete(this);		
+		
+	}
+
+	public boolean update(Connection conn) {
+		ShowDAO dao = new ShowDAO(conn);
+		return dao.update(this);		
+		
+	}
+
+	public Show find(Connection conn) {
+		ShowDAO dao = new ShowDAO(conn);
+		return dao.find(this.getIDShow());		
+		
+	}
+	
+	public ArrayList<Show> findAll(Connection conn) {
+		ShowDAO dao = new ShowDAO(conn);
+		ArrayList<Show> l = new ArrayList<Show>();
+		for(var p : dao.findAll()) {
+			l.add((Show)p);
+		}
+		return l;		
+		
+	}
+	
 }

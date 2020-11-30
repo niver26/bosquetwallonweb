@@ -1,8 +1,12 @@
 package be.niver.bosquetwallonweb;
 
 import java.io.Serializable;
+import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
+
+import be.niver.dao.ConfigurationDAO;
 
 public class Configuration implements Serializable{
 	private static final long serialVersionUID = 7787170877756499146L;
@@ -75,6 +79,45 @@ public class Configuration implements Serializable{
 				+ ", show_configuration_fk=" + show_configuration_fk + ", listCategoryRoom=" + listCategoryRoom + "]";
 	}
 	
+	/**************************************************************************************/
+	/**
+	 * les fonctions de la classe
+	 * @return
+	 */
+	
+	public boolean create(Connection conn) {
+		ConfigurationDAO dao = new ConfigurationDAO(conn);
+		return dao.create(this);		
+		
+	}
+
+	public boolean delete(Connection conn) {
+		ConfigurationDAO dao = new ConfigurationDAO(conn);
+		return dao.delete(this);		
+		
+	}
+
+	public boolean update(Connection conn) {
+		ConfigurationDAO dao = new ConfigurationDAO(conn);
+		return dao.update(this);		
+		
+	}
+
+	public Configuration find(Connection conn) {
+		ConfigurationDAO dao = new ConfigurationDAO(conn);
+		return dao.find(this.getIDConfiguration());		
+		
+	}
+	
+	public ArrayList<Configuration> findAll(Connection conn) {
+		ConfigurationDAO dao = new ConfigurationDAO(conn);
+		ArrayList<Configuration> l = new ArrayList<Configuration>();
+		for(var p : dao.findAll()) {
+			l.add((Configuration)p);
+		}
+		return l;		
+		
+	}
 	
 	
 	

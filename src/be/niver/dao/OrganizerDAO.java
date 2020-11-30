@@ -63,20 +63,7 @@ public class OrganizerDAO extends PersonDAO {
 	
 	@Override
 	public boolean update(Person person) {
-		
-		boolean result = false;
-		try {
-			boolean result1 =super.update(person);
-			Organizer obj = (Organizer) person;
-			result = updateStatement(String.format("UPDATE Organizer "
-					+ "SET IDPerson_Organizer_fk = %s"
-					+ obj.getIDPerson_Organizer_fk())); 
-			
-		result = result && result1;
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return result;
+		return super.update(person);
 	}
 	
 	

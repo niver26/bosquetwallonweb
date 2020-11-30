@@ -17,17 +17,22 @@ public class RepresentationDAO extends DAO<Representation> {
 	public RepresentationDAO(Connection conn) {
 		super(conn);
 	}
-
+	
 	@Override
 	public boolean create(Representation obj) { 
 		boolean result = false;
 		try {
-			result = updateStatement(String.format("INSERT INTO Representation VALUES ( 0 ,'%s','%s', %s)",  
-					obj.getBiginTime(),
-					obj.getEndTime(),
-					obj.getPlace_representation_fk().getIDPlace()
-					));  
-		
+			
+			PreparedStatement ps = connect.prepareStatement("INSERT INTO Representation(BiginTime,"
+					+ "EndTime,"
+					+ "dateRepresentation ) VALUES ( ?, ?,?)" );
+			ps.setTime(1, obj.getBiginTime());
+			ps.setTime(2, obj.getEndTime());
+			ps.setDate(3, obj.getDateRepresentation());
+			int result1 = ps.executeUpdate();
+			System.out.println("update result is "+ result1);  
+			 result = result1 >0;
+			 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -56,11 +61,11 @@ public class RepresentationDAO extends DAO<Representation> {
 		boolean result = false;
 		try {
 			result = updateStatement(String.format("UPDATE  Representation "
-					+ "SET BiginTime = '%s', EndTime = '%s', place_representation_fk= %s  "
+					+ "SET BiginTime = '%s', EndTime = '%s' dateRepresentation = '%s' "
 					+ " WHERE IDRepresentation = %s", 
 					obj.getBiginTime(),
-					obj.getEndTime(), 
-					obj.getPlace_representation_fk().getIDPlace(),
+					obj.getEndTime(),
+					obj.getDateRepresentation(),
 					obj.getIDRepresentation()
 					));  
 			//System.out.println("update Representation is "+ result);
@@ -81,19 +86,11 @@ public class RepresentationDAO extends DAO<Representation> {
 			ResultSet result = this.connect
 					.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY)
 					.executeQuery("SELECT * FROM Representation as R "
-							+ " INNER JOIN Place as P on R.place_representation_fk= P.IDPlace "
 							+ " WHERE IDRepresentation = " + id);
 		
 			if (result.first())
 			{
-				/*String heureString1 = result.getString("BiginTime");
-				Time heuredebut =   Time.valueOf(heureString1.substring(0,10));
-				
-				String heureString2 = result.getString("EndTime");
-				Time heurefin =   Time.valueOf(heureString2.substring(0, 10));*/
-				
-				Place  place = new Place(result.getInt("IDBooking"));
-				obj = new Representation(id, result.getTime("BiginTime"), result.getTime("EndTime"), place);
+				obj = new Representation(id, result.getTime("BiginTime"), result.getTime("EndTime"), result.getDate("dateRepresentation"));
 				
 			}
 		
@@ -108,20 +105,13 @@ public class RepresentationDAO extends DAO<Representation> {
 	public ArrayList<Representation> findAll() {
 		ArrayList<Representation> objs = new ArrayList<Representation>();
 		try {
-			PreparedStatement ps = connect.prepareStatement(String.format("SELECT * FROM Representation as R "
-					+ " INNER JOIN Place as P on R.place_representation_fk= P.IDPlace "), 
+			PreparedStatement ps = connect.prepareStatement(String.format("SELECT * FROM Representation as R "), 
 					ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);  
             ResultSet result = ps.executeQuery();  
             
 			while (result.next()) {
-				/*String heureString1 = result.getString("BiginTime");
-				Time heuredebut =   Time.valueOf(heureString1.substring(0,10));
 				
-				String heureString2 = result.getString("EndTime");
-				Time heurefin =   Time.valueOf(heureString2.substring(0, 10));*/
-				
-				Place  place = new Place(result.getInt("IDBooking"));
-				Representation obj = new Representation(result.getInt("IDRepresentation"), result.getTime("BiginTime"), result.getTime("EndTime"), place);
+				Representation obj = new Representation(result.getInt("IDRepresentation"), result.getTime("BiginTime"), result.getTime("EndTime"), result.getDate("dateRepresentation"));
 				objs.add(obj);
 			}
 		

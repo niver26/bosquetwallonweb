@@ -147,7 +147,7 @@ public class Connexion extends JFrame {
 						System.out.println("password phrase login is : "+  passwordFieldConnexion.getText());
 						Person person = new Person(0, null, null, null,  textFieldEmailconnexion.getText() , passwordFieldConnexion.getText(), 0);
 						var p = person.login(be.niver.connect.ConnectDataBase.getInstance());
-						System.out.println("person: "+  p);
+						
 						if(p.getIDperson() > 0) {
 							switch (p.getrole()) {
 							case 2: {
@@ -166,6 +166,7 @@ public class Connexion extends JFrame {
 							Person.CurrentUser = p;
 							Home home = new Home();
 							home.setVisible(true);
+							System.out.println("person: "+  p);
 							dispose();
 						} else {
 							JOptionPane.showMessageDialog(null, "Compte ou mot de passe incorret", "bosquet Wallon ", JOptionPane.ERROR_MESSAGE);

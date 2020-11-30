@@ -1,8 +1,12 @@
 package be.niver.bosquetwallonweb;
 
 import java.io.Serializable;
+import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
+
+import be.niver.dao.OrderDAO;
 
 public class Order implements Serializable{
 	private static final long serialVersionUID = 7787170877756499146L;
@@ -83,11 +87,50 @@ public class Order implements Serializable{
 	
 	@Override
 	public String toString() {
-		return "Order [IDOrder=" + IDOrder + ", spectator_oder_fk=" + spectator_oder_fk + ", paymentMethod="
-				+ paymentMethod + ", DeliveryMethod=" + DeliveryMethod + ", price=" + price + ", listPlace=" + listPlace
-				+ "]";
+		return "numero commande " + IDOrder + "numero Spectateur" + spectator_oder_fk + "methode de paiement="
+				+ paymentMethod + "methode de livraison =" + DeliveryMethod + "prix =" + price;
 	}
 
+	
+	/**************************************************************************************/
+	/**
+	 * les fonctions de la classe
+	 * @return
+	 */
+	
+	public boolean create(Connection conn) {
+		OrderDAO dao = new OrderDAO(conn);
+		return dao.create(this);		
+		
+	}
+
+	public boolean delete(Connection conn) {
+		OrderDAO dao = new OrderDAO(conn);
+		return dao.delete(this);		
+		
+	}
+
+	public boolean update(Connection conn) {
+		OrderDAO dao = new OrderDAO(conn);
+		return dao.update(this);		
+		
+	}
+
+	public Order find(Connection conn) {
+		OrderDAO dao = new OrderDAO(conn);
+		return dao.find(this.getIDOrder());		
+		
+	}
+	
+	public ArrayList<Order> findAll(Connection conn) {
+		OrderDAO dao = new OrderDAO(conn);
+		ArrayList<Order> l = new ArrayList<Order>();
+		for(var p : dao.findAll()) {
+			l.add((Order)p);
+		}
+		return l;		
+		
+	}
 	
 
 }
